@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwampWater — The University Beverage Launch Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== TOKENS ===================== */
+:root {
+  --navy:       #1F2D5A;
+  --ink:        #162042;
+  --orange:     #D89A4A;
+  --sand:       #E7D5BC;
+  --cream:      #F8F7F3;
+  --gray:       #E9E9E6;
+  --text-dark:  #0D1628;
+  --text-mid:   #4A5568;
+  --text-light: #8A94A6;
+
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-head:    'Barlow Condensed', sans-serif;
+  --ff-body:    'DM Sans', sans-serif;
+
+  --max-w: 1180px;
+  --section-pad: 120px 0;
+  --radius: 4px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================== RESET ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ===================== UTILITIES ===================== */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+.label {
+  font-family: var(--ff-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.label--light { color: var(--sand); }
+.label--muted { color: var(--text-light); }
+
+h1, h2, h3, h4 { font-family: var(--ff-head); font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+
+.display-serif {
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.05;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 15px 34px;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-primary {
+  background: var(--orange);
+  color: var(--ink);
+  border-color: var(--orange);
+}
+.btn-primary:hover { background: #c48840; border-color: #c48840; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(216,154,74,0.35); }
+
+.btn-outline-light {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgba(255,255,255,0.35);
+}
+.btn-outline-light:hover { border-color: var(--sand); color: var(--sand); }
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btn-outline-dark:hover { background: var(--navy); color: var(--cream); }
+
+.btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.divider-wave {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  display: block;
+}
+.divider-wave svg { display: block; width: 100%; }
+
+/* ===================== NAV ===================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 32px;
+  transition: all 0.3s ease;
+}
+nav.scrolled {
+  background: rgba(22, 32, 66, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+.nav-logo-svg {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--ff-head);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--sand); }
+.nav-cta {
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--orange);
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+}
+.nav-cta:hover { background: #c48840; }
+
+/* ===================== HERO ===================== */
+#hero {
+  min-height: 100vh;
+  background: var(--ink);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg-layer {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(31,45,90,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(216,154,74,0.08) 0%, transparent 60%);
+}
+
+/* Subtle topographic lines */
+.hero-topo {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 38px,
+      rgba(231,213,188,0.5) 38px,
+      rgba(231,213,188,0.5) 39px
+    );
+}
+
+.hero-gator-outline {
+  position: absolute;
+  top: 0;
+  right: -60px;
+  width: 55%;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 140px 32px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--orange);
+}
+.hero-eyebrow-text {
+  font-family: var(--ff-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.hero-h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.hero-h1 em {
+  display: block;
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 72px);
+  color: var(--sand);
+  line-height: 1.1;
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  max-width: 420px;
+  line-height: 1.75;
+  margin-bottom: 44px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-stat-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: all var(--transition);
+}
+.stat-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(216,154,74,0.3);
+  transform: translateY(-2px);
+}
+.stat-card.featured {
+  grid-column: span 2;
+  background: rgba(216,154,74,0.1);
+  border-color: rgba(216,154,74,0.25);
+}
+.stat-num {
+  font-family: var(--ff-display);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-family: var(--ff-head);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.stat-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-text {
+  font-family: var(--ff-head);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ===================== MARQUEE TICKER ===================== */
+.ticker {
+  background: var(--orange);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 30s linear infinite;
+}
+.ticker-item {
+  font-family: var(--ff-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.ticker-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(22,32,66,0.4);
+  flex-shrink: 0;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===================== OPPORTUNITY SECTION ===================== */
+#opportunity {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+
+.section-intro {
+  max-width: 600px;
+  margin-bottom: 72px;
+}
+
+.opp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.opp-card {
+  background: #fff;
+  border: 1px solid var(--gray);
+  border-radius: 6px;
+  padding: 36px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+.opp-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+.opp-card:hover { box-shadow: 0 12px 40px rgba(31,45,90,0.1); transform: translateY(-3px); }
+.opp-card:hover::after { transform: scaleX(1); }
+
+.opp-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(31,45,90,0.06);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--navy);
+}
+.opp-icon svg { width: 22px; height: 22px; }
+
+.opp-card h3 {
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.opp-card p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* ===================== PROBLEM ===================== */
+#problem {
+  background: var(--navy);
+  padding: var(--section-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+.problem-topo {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 58px,
+      rgba(231,213,188,0.5) 58px,
+      rgba(231,213,188,0.5) 59px
+    );
+}
+
+.problem-inner { position: relative; z-index: 1; }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 60px;
+}
+
+.problem-left h2 {
+  font-size: clamp(38px, 5vw, 60px);
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+.problem-left h2 em {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--sand);
+}
+.problem-left p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+  line-height: 1.75;
+}
+
+.problem-items { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+
+.problem-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  transition: all var(--transition);
+}
+.problem-item:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(216,154,74,0.3);
+}
+.problem-bullet {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(216,154,74,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-family: var(--ff-head);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+}
+.problem-item-text h4 {
+  font-size: 15px;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 4px;
+  font-family: var(--ff-head);
+  letter-spacing: 0.02em;
+}
+.problem-item-text p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===================== WHY SWAMPWATER ===================== */
+#why {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+
+.why-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.why-header h2 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  color: var(--navy);
+  line-height: 1.05;
+}
+.why-header h2 em {
+  display: block;
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange);
+}
+.why-header p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  align-self: end;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--gray);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.pillar {
+  background: var(--cream);
+  padding: 40px 32px;
+  transition: background var(--transition);
+}
+.pillar:hover { background: #fff; }
+.pillar-num {
+  font-family: var(--ff-display);
+  font-size: 52px;
+  font-weight: 500;
+  color: rgba(31,45,90,0.1);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.pillar h3 {
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+.pillar p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+.pillar-accent {
+  width: 28px;
+  height: 2px;
+  background: var(--orange);
+  margin-top: 20px;
+}
+
+/* ===================== HOW IT WORKS ===================== */
+#how {
+  background: var(--ink);
+  padding: var(--section-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+.how-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(216,154,74,0.04), transparent);
+}
+
+.how-inner { position: relative; z-index: 1; }
+
+.how-header { text-align: center; margin-bottom: 72px; }
+.how-header h2 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  color: #fff;
+  margin-bottom: 16px;
+}
+.how-header p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(216,154,74,0.4), transparent);
+}
+
+.step {
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.step-num {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(216,154,74,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+  font-family: var(--ff-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--orange);
+  position: relative;
+  z-index: 1;
+  background: var(--ink);
+}
+
+.step h3 {
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 10px;
+}
+.step p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+
+/* ===================== SERVES ===================== */
+#serves {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+
+.serves-header { margin-bottom: 56px; }
+.serves-header h2 {
+  font-size: clamp(34px, 4vw, 52px);
+  color: var(--navy);
+}
+
+.audience-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--gray);
+  margin-bottom: 48px;
+}
+.audience-tab {
+  font-family: var(--ff-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: 14px 28px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition);
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: -1px;
+}
+.audience-tab:hover { color: var(--navy); }
+.audience-tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--orange);
+}
+
+.audience-panel { display: none; }
+.audience-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+.audience-text h3 {
+  font-size: 32px;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.audience-text p {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+  line-height: 1.75;
+}
+
+.audience-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.audience-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.audience-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.audience-callout {
+  background: var(--navy);
+  border-radius: 6px;
+  padding: 40px 36px;
+  color: #fff;
+}
+.audience-callout .label { color: var(--orange); }
+.audience-callout h4 {
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.audience-callout p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+.audience-callout .btn {
+  margin-top: 28px;
+}
+
+/* ===================== LAUNCHES ===================== */
+#launches {
+  background: var(--navy);
+  padding: var(--section-pad);
+  overflow: hidden;
+}
+
+.launches-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+  gap: 40px;
+}
+.launches-header h2 {
+  font-size: clamp(34px, 4vw, 52px);
+  color: #fff;
+  max-width: 540px;
+}
+.launches-header p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  max-width: 320px;
+}
+
+.launch-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.launch-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+.launch-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(216,154,74,0.3);
+  transform: translateY(-4px);
+}
+
+.launch-card-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.launch-school {
+  font-family: var(--ff-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: -0.01em;
+}
+.launch-badge {
+  font-family: var(--ff-head);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(216,154,74,0.12);
+  border: 1px solid rgba(216,154,74,0.25);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.launch-card-body { padding: 24px 28px; }
+.launch-product {
+  font-family: var(--ff-display);
+  font-size: 26px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--sand);
+  margin-bottom: 10px;
+}
+.launch-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.launch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.launch-tag {
+  font-family: var(--ff-head);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.05);
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+/* ===================== WHY NOW ===================== */
+#whynow {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+
+.whynow-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.whynow-left h2 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  color: var(--navy);
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.whynow-left h2 em {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange);
+}
+.whynow-left p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+.whynow-left .btn { margin-top: 8px; }
+
+.whynow-right { display: flex; flex-direction: column; gap: 4px; }
+
+.now-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 28px;
+  background: #fff;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  transition: all var(--transition);
+}
+.now-item:hover {
+  border-color: rgba(216,154,74,0.4);
+  box-shadow: 0 4px 20px rgba(31,45,90,0.06);
+}
+.now-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(31,45,90,0.06);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--navy);
+}
+.now-icon svg { width: 20px; height: 20px; }
+.now-text h4 {
+  font-size: 16px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.now-text p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ===================== FOUNDER ===================== */
+#founder {
+  background: #fff;
+  padding: var(--section-pad);
+  border-top: 1px solid var(--gray);
+}
+
+.founder-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.founder-ident {
+  position: sticky;
+  top: 120px;
+}
+
+.founder-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--ink) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.founder-monogram {
+  font-family: var(--ff-display);
+  font-size: 80px;
+  font-weight: 600;
+  color: rgba(231,213,188,0.25);
+}
+
+.founder-name {
+  font-family: var(--ff-head);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.founder-title {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.founder-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-head);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.founder-location svg { width: 14px; height: 14px; color: var(--orange); }
+
+.founder-content {}
+.founder-content .label { margin-bottom: 20px; }
+.founder-content h2 {
+  font-size: clamp(30px, 3.5vw, 44px);
+  color: var(--navy);
+  margin-bottom: 28px;
+  line-height: 1.1;
+}
+.founder-content h2 em {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--orange);
+}
+.founder-content p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.founder-principles {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+.principle h4 {
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.principle p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin: 0;
+}
+.principle-line {
+  width: 20px;
+  height: 2px;
+  background: var(--orange);
+  margin-bottom: 12px;
+}
+
+/* ===================== PARTNERSHIP CTA ===================== */
+#partner {
+  background: var(--ink);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(31,45,90,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(216,154,74,0.08) 0%, transparent 60%);
+}
+
+.partner-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.partner-inner .label--light { margin-bottom: 20px; }
+
+.partner-inner h2 {
+  font-size: clamp(38px, 5vw, 64px);
+  color: #fff;
+  line-height: 1.0;
+  margin-bottom: 24px;
+}
+.partner-inner h2 em {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--sand);
+}
+
+.partner-inner p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 44px;
+  line-height: 1.7;
+}
+
+.partner-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.partner-footer-note {
+  margin-top: 28px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  font-style: italic;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  background: var(--text-dark);
+  padding: 60px 0 32px;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.footer-brand {}
+.footer-logo {
+  font-family: var(--ff-head);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 7px 14px;
+  border-radius: 20px;
+}
+.footer-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.footer-col h5 {
+  font-family: var(--ff-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition);
+}
+.footer-col ul li a:hover { color: var(--sand); }
+
+.footer-bottom {
+  padding-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+.footer-location {
+  font-family: var(--ff-head);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ===================== ANIMATIONS ===================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up-d1 { transition-delay: 0.1s; }
+.fade-up-d2 { transition-delay: 0.2s; }
+.fade-up-d3 { transition-delay: 0.3s; }
+.fade-up-d4 { transition-delay: 0.4s; }
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 48px; padding-top: 120px; }
+  .stat-cards { grid-template-columns: 1fr 1fr; }
+  .stat-card.featured { grid-column: span 2; }
+  .opp-grid { grid-template-columns: 1fr 1fr; }
+  .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+  .why-header { grid-template-columns: 1fr; gap: 24px; }
+  .pillars { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .steps::before { display: none; }
+  .audience-panel.active { grid-template-columns: 1fr; }
+  .launch-cards { grid-template-columns: 1fr 1fr; }
+  .whynow-inner { grid-template-columns: 1fr; gap: 48px; }
+  .founder-inner { grid-template-columns: 1fr; }
+  .founder-ident { position: static; display: flex; align-items: center; gap: 24px; }
+  .founder-avatar { width: 100px; height: 100px; flex-shrink: 0; }
+  .founder-monogram { font-size: 40px; }
+  .founder-principles { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .launches-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 600px) {
+  :root { --section-pad: 72px 0; }
+  .opp-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .launch-cards { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-stat-cards { grid-template-columns: 1fr; }
+  .stat-card.featured { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img class="nav-logo-svg" src="data:image/png;base64,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" alt="SwampWater" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#serves">Partners</a></li>
+      <li><a href="#launches">Launches</a></li>
+      <li><a href="#founder">About</a></li>
+    </ul>
+    <a href="#partner" class="nav-cta">Request Partnership</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-bg-layer"></div>
+  <div class="hero-topo"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">University Beverage Platform</span>
+      </div>
+
+      <h1 class="hero-h1">
+        THE CAMPUS
+        <em>Beverage Layer</em>
+        IS OPEN.
+      </h1>
+
+      <p class="hero-sub">
+        SwampWater connects universities, distilleries, and distributors into licensed, localized campus beverage partnerships — built to repeat, built to scale.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#partner" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Request Partnership
+        </a>
+        <a href="#how" class="btn btn-outline-light">See the Model</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stat-cards">
+        <div class="stat-card">
+          <div class="stat-num">900+</div>
+          <div class="stat-label">U.S. Universities</div>
+          <div class="stat-desc">Addressable licensing opportunity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$4.2B</div>
+          <div class="stat-label">RTD Market</div>
+          <div class="stat-desc">Hard seltzer &amp; canned cocktail growth</div>
+        </div>
+        <div class="stat-card featured">
+          <div class="stat-num">~0</div>
+          <div class="stat-label">Structured Campus RTD Partnerships</div>
+          <div class="stat-desc">Beer dominates. Modern formats remain unclaimed. That's the window SwampWater is built to occupy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-text">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===================== TICKER ===================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">University Licensing <span class="ticker-dot"></span></span>
+    <span class="ticker-item">RTD &amp; Hard Seltzer Partnerships <span class="ticker-dot"></span></span>
+    <span class="ticker-item">NIL Collaboration Framework <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Co-Packer Coordination <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Campus Channel Rollout <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Tailgate. Greek. Alumni. Rivalry. <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Boca Raton, FL — FAU Tech Runway <span class="ticker-dot"></span></span>
+    <span class="ticker-item">University Licensing <span class="ticker-dot"></span></span>
+    <span class="ticker-item">RTD &amp; Hard Seltzer Partnerships <span class="ticker-dot"></span></span>
+    <span class="ticker-item">NIL Collaboration Framework <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Co-Packer Coordination <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Campus Channel Rollout <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Tailgate. Greek. Alumni. Rivalry. <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Boca Raton, FL — FAU Tech Runway <span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- ===================== OPPORTUNITY ===================== -->
+<section id="opportunity">
+  <div class="container">
+    <div class="section-intro fade-up">
+      <span class="label">The Whitespace</span>
+      <h2 style="font-size: clamp(32px,4vw,50px); color: var(--navy); margin-bottom: 16px;">Beer has the campus.<br>Everything else is <span class="display-serif" style="font-size: 1.1em; color: var(--orange);">unclaimed.</span></h2>
+      <p style="font-size:16px; color: var(--text-mid); max-width:540px; line-height:1.75;">University beverage licensing has been dominated by legacy beer contracts for decades. Meanwhile, Gen Z's drinking preferences have shifted dramatically — and the infrastructure to meet them on campus simply doesn't exist yet.</p>
+    </div>
+
+    <div class="opp-grid">
+      <div class="opp-card fade-up fade-up-d1">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Gen Z Has Moved On</h3>
+        <p>Hard seltzers, RTDs, and canned cocktails now represent the fastest-growing segment of the adult beverage industry — driven almost entirely by the demographic that lives on college campuses.</p>
+      </div>
+      <div class="opp-card fade-up fade-up-d2">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>No Structured Model Exists</h3>
+        <p>Universities want brand-aligned beverage partnerships. Distilleries want distribution. Nobody has built the coordination layer that connects both sides reliably, compliantly, and at scale.</p>
+      </div>
+      <div class="opp-card fade-up fade-up-d3">
+        <div class="opp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Timing Is Now</h3>
+        <p>NIL frameworks, evolving alcohol sponsorship policy, and the growth of campus culture events have created a narrow, open window for a first mover to establish category presence before consolidation hits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEM ===================== -->
+<section id="problem">
+  <div class="problem-topo"></div>
+  <div class="problem-inner">
+    <div class="container">
+      <span class="label label--light fade-up">The Gap</span>
+      <div class="problem-grid">
+        <div class="problem-left fade-up">
+          <h2>The university beverage<br>partnership model is<br><em>structurally broken.</em></h2>
+          <p>The current landscape of campus alcohol partnerships is fragmented, compliance-heavy, and locked into legacy beer relationships. Modern beverage producers and university licensing teams are both looking for something better — they just haven't had a structured path to get there.</p>
+          <p>SwampWater is that path.</p>
+        </div>
+        <div class="problem-items fade-up fade-up-d2">
+          <div class="problem-item">
+            <div class="problem-bullet">01</div>
+            <div class="problem-item-text">
+              <h4>Beer Lock-In Persists by Default</h4>
+              <p>Campus venues, distributors, and licensing offices default to existing beer contracts because no viable alternative partnership model has been presented to them.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-bullet">02</div>
+            <div class="problem-item-text">
+              <h4>Distilleries Can't Navigate Campus</h4>
+              <p>Craft producers and RTD brands lack the institutional relationships and compliance infrastructure needed to execute a university partnership from scratch.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-bullet">03</div>
+            <div class="problem-item-text">
+              <h4>Generic Products Don't Land</h4>
+              <p>Students don't want a national can that happens to show up at their tailgate. They want something that feels like it belongs to their campus, their season, their culture.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-bullet">04</div>
+            <div class="problem-item-text">
+              <h4>No Operator Owns the Rollout</h4>
+              <p>Even when a university and a producer connect, the coordination required to go from concept to shelf — compliantly, on time, on-brand — typically falls apart without a dedicated operator.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY ===================== -->
+<section id="why">
+  <div class="container">
+    <div class="why-header fade-up">
+      <h2>Built to connect.<br>Designed to<br><em>repeat.</em></h2>
+      <p>SwampWater's value isn't in a single can. It's in the infrastructure underneath — the relationships, compliance framework, rollout playbook, and partnership architecture that makes a campus launch replicable across 900 universities.</p>
+    </div>
+    <div class="pillars fade-up fade-up-d1">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Licensed Partnership Architecture</h3>
+        <p>We structure university licensing relationships and align brand identity with beverage execution — handling what neither side can do alone.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Localized by Design</h3>
+        <p>Every campus launch is culturally specific. Team identity, campus traditions, and seasonal moments are baked into each product drop — not bolted on.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Scalable Rollout Engine</h3>
+        <p>The same model that works for one university repeats cleanly at the next. Our playbook is built for replication, not reinvention.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <h3>Channel-Ready from Day One</h3>
+        <p>We coordinate with campus-area bars, retailers, and distributors so product moves as soon as it launches — not weeks later.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">05</div>
+        <h3>NIL & Activation Integration</h3>
+        <p>Ambassador programs, QR activations, and NIL tie-ins are part of the launch architecture — not afterthoughts added at the end.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">06</div>
+        <h3>Operator-Owned Compliance</h3>
+        <p>We own the hard part — licensing navigation, regulatory alignment, and channel compliance — so our partners can focus on their core business.</p>
+        <div class="pillar-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how">
+  <div class="how-bg"></div>
+  <div class="how-inner">
+    <div class="container">
+      <div class="how-header fade-up">
+        <span class="label label--light">The Model</span>
+        <h2>How SwampWater Works</h2>
+        <p>A four-step partnership framework that takes a campus from concept to shelf — compliantly, efficiently, and on-brand.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step fade-up fade-up-d1">
+          <div class="step-num">1</div>
+          <h3>University Partnership</h3>
+          <p>We engage licensing departments, NIL collectives, and athletic partnerships to align on brand rights, compliance requirements, and launch calendar.</p>
+        </div>
+        <div class="step fade-up fade-up-d2">
+          <div class="step-num">2</div>
+          <h3>Producer Matchmaking</h3>
+          <p>We match each campus with the right distillery or co-packer — based on regional presence, production capability, and product-format fit.</p>
+        </div>
+        <div class="step fade-up fade-up-d3">
+          <div class="step-num">3</div>
+          <h3>Launch Architecture</h3>
+          <p>We build the full campaign: product identity, channel strategy, ambassador activation, QR integration, and seasonal drop calendar.</p>
+        </div>
+        <div class="step fade-up fade-up-d4">
+          <div class="step-num">4</div>
+          <h3>Channel Rollout</h3>
+          <p>We coordinate distribution through campus-area bars, retailers, and licensed venues — with built-in reorder and relaunch capability.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top: 64px;" class="fade-up">
+        <a href="#partner" class="btn btn-primary">Start a Conversation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHO WE SERVE ===================== -->
+<section id="serves">
+  <div class="container">
+    <div class="serves-header fade-up">
+      <span class="label">Partnership Tracks</span>
+      <h2>Who We Partner With</h2>
+    </div>
+
+    <div class="audience-tabs fade-up">
+      <button class="audience-tab active" onclick="showPanel('universities', this)">Universities</button>
+      <button class="audience-tab" onclick="showPanel('distilleries', this)">Distilleries & Producers</button>
+      <button class="audience-tab" onclick="showPanel('distributors', this)">Distributors & Retail</button>
+      <button class="audience-tab" onclick="showPanel('investors', this)">Investors & Advisors</button>
+    </div>
+
+    <div id="panel-universities" class="audience-panel active fade-up">
+      <div class="audience-text">
+        <h3>For Universities & Licensing Bodies</h3>
+        <p>SwampWater structures compliant, brand-aligned beverage partnerships that generate licensing revenue and deepen campus culture — without adding operational burden to your licensing team.</p>
+        <p>We handle the producer relationships, compliance navigation, and rollout coordination. You maintain brand control and receive a structured partnership that reflects your institution's identity.</p>
+        <ul class="audience-list">
+          <li>Licensing revenue share on every unit produced</li>
+          <li>Brand identity protection built into the agreement structure</li>
+          <li>Seasonal and event-timed product drops aligned with your calendar</li>
+          <li>NIL and ambassador program integration</li>
+          <li>No operational burden on your licensing team</li>
+        </ul>
+      </div>
+      <div class="audience-callout">
+        <span class="label">Your Campus. Your Brand.</span>
+        <h4>A beverage partnership that actually reflects your institution.</h4>
+        <p>Most campus alcohol relationships are legacy beer deals that don't match the cultural moment. SwampWater builds something that does — localized, compliant, and built on your terms.</p>
+        <a href="#partner" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Explore University Partnerships
+        </a>
+      </div>
+    </div>
+
+    <div id="panel-distilleries" class="audience-panel fade-up">
+      <div class="audience-text">
+        <h3>For Distilleries & Co-Packers</h3>
+        <p>SwampWater gives beverage producers a structured path to university partnerships — with licensing framework, brand compliance, and distribution coordination handled upfront.</p>
+        <p>If you have production capacity, geographic presence, and product quality, we bring the university relationships, the launch architecture, and the channel access.</p>
+        <ul class="audience-list">
+          <li>Access to university licensing relationships you can't build alone</li>
+          <li>Turnkey campaign and product identity direction</li>
+          <li>Channel coordination with campus-area distributors and retailers</li>
+          <li>Compliance and licensing documentation support</li>
+          <li>Repeatable model across multiple campus partnerships</li>
+        </ul>
+      </div>
+      <div class="audience-callout">
+        <span class="label">Production Ready?</span>
+        <h4>Your product. Our platform. Campus-wide distribution.</h4>
+        <p>You have the capability. We have the university access and rollout infrastructure. Let's talk about what a campus partnership could look like for your brand.</p>
+        <a href="#partner" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Producer Inquiry
+        </a>
+      </div>
+    </div>
+
+    <div id="panel-distributors" class="audience-panel fade-up">
+      <div class="audience-text">
+        <h3>For Distributors & Retail Partners</h3>
+        <p>SwampWater creates demand for locally-relevant, campus-specific beverage products in the channels that matter most — bars, liquor stores, and licensed venues within a campus trade area.</p>
+        <p>We structure university launches with built-in channel strategy, which means your shelf and tap lines receive purpose-built product — with an existing audience on campus ready to buy it.</p>
+        <ul class="audience-list">
+          <li>Turnkey product placement coordination</li>
+          <li>Campus-driven demand in your existing trade area</li>
+          <li>Seasonal and limited-release cadence drives repeat sell-through</li>
+          <li>Co-branded marketing assets included in every launch</li>
+          <li>Priority distribution partner relationships in target markets</li>
+        </ul>
+      </div>
+      <div class="audience-callout">
+        <span class="label">Campus Trade Area</span>
+        <h4>A product your market already wants, before it hits your shelf.</h4>
+        <p>University-affiliated launches generate organic demand in campus-adjacent retail. SwampWater coordinates the channel integration so distribution is efficient and reorder velocity is predictable.</p>
+        <a href="#partner" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Distribution Inquiry
+        </a>
+      </div>
+    </div>
+
+    <div id="panel-investors" class="audience-panel fade-up">
+      <div class="audience-text">
+        <h3>For Investors & Strategic Advisors</h3>
+        <p>SwampWater is not a beverage brand. It is a university beverage launch platform — a repeatable, operator-run partnership model with structural first-mover advantage in an underpenetrated market.</p>
+        <p>The model's defensibility comes from institutional relationships, not product exclusivity. Each university partnership creates compounding value: licensing revenue, operational precedent, and market entrenchment before category consolidation.</p>
+        <ul class="audience-list">
+          <li>Massive addressable market with near-zero structured competition</li>
+          <li>Revenue across licensing fees, partnership management, and channel coordination</li>
+          <li>Repeatable playbook with decreasing marginal cost per launch</li>
+          <li>First-mover advantage in a licensing category about to mature</li>
+          <li>Founded and operated by a focused, operator-first team</li>
+        </ul>
+      </div>
+      <div class="audience-callout">
+        <span class="label">Investor Relations</span>
+        <h4>The category infrastructure position nobody has taken yet.</h4>
+        <p>The most valuable position in any emerging category is the one that owns the operator layer. SwampWater is building that position — campus by campus, partnership by partnership — before anyone else.</p>
+        <a href="#partner" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Investor Inquiry
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== LAUNCHES ===================== -->
+<section id="launches">
+  <div class="container">
+    <div class="launches-header fade-up">
+      <div>
+        <span class="label label--light">Launch Concepts</span>
+        <h2>What a Campus Launch Actually Looks Like</h2>
+      </div>
+      <p>Every SwampWater partnership is built around a specific campus's culture, calendar, and identity — not a generic template dropped into a new market.</p>
+    </div>
+
+    <div class="launch-cards">
+      <div class="launch-card fade-up fade-up-d1">
+        <div class="launch-card-header">
+          <span class="launch-school">STATE U</span>
+          <span class="launch-badge">Concept</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-product">Rivalry Week Drop</div>
+          <p class="launch-desc">A limited-edition hard seltzer launch timed to the biggest rivalry game of the season. University branding, campus-area retail placement, QR-linked fan activation, and a game-week sell-through window built into the channel strategy.</p>
+          <div class="launch-tags">
+            <span class="launch-tag">Hard Seltzer</span>
+            <span class="launch-tag">Limited Edition</span>
+            <span class="launch-tag">QR Activation</span>
+            <span class="launch-tag">Rivalry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="launch-card fade-up fade-up-d2">
+        <div class="launch-card-header">
+          <span class="launch-school">SEC CAMPUS</span>
+          <span class="launch-badge">Concept</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-product">Tailgate Season Series</div>
+          <p class="launch-desc">A three-SKU seasonal series — one per quarter of the football season — launched through campus-area bars and a direct-to-fan retail partner. NIL ambassador integration drives awareness; sell-through data informs the next season's drop.</p>
+          <div class="launch-tags">
+            <span class="launch-tag">RTD Series</span>
+            <span class="launch-tag">Seasonal</span>
+            <span class="launch-tag">NIL</span>
+            <span class="launch-tag">Football</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="launch-card fade-up fade-up-d3">
+        <div class="launch-card-header">
+          <span class="launch-school">SUNBELT U</span>
+          <span class="launch-badge">Concept</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-product">Welcome Week Collab</div>
+          <p class="launch-desc">A first-week-of-semester hard canned cocktail launch distributed through three campus-adjacent bars and one major retail partner. Greek life ambassador program seeded ahead of launch. Reorder trigger activated within the first 30 days.</p>
+          <div class="launch-tags">
+            <span class="launch-tag">Canned Cocktail</span>
+            <span class="launch-tag">Greek Life</span>
+            <span class="launch-tag">Ambassador</span>
+            <span class="launch-tag">Welcome Week</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;" class="fade-up">
+      <p style="font-family: var(--ff-head); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 20px;">These are launch concepts, not active campaigns. Designed to illustrate the model's scope and specificity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY NOW ===================== -->
+<section id="whynow">
+  <div class="container">
+    <div class="whynow-inner">
+      <div class="whynow-left fade-up">
+        <span class="label">Market Timing</span>
+        <h2>This window is<br><em>open now.</em><br>Not in five years.</h2>
+        <p>Three converging forces have created the conditions for a first mover to establish category infrastructure in university RTD partnerships. Miss this window and you're fighting incumbents.</p>
+        <a href="#partner" class="btn btn-outline-dark" style="margin-top: 8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Get Into the Market
+        </a>
+      </div>
+      <div class="whynow-right">
+        <div class="now-item fade-up fade-up-d1">
+          <div class="now-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="now-text">
+            <h4>NIL Framework Is Mature Enough to Use</h4>
+            <p>NIL infrastructure at major universities has stabilized enough to support structured commercial beverage partnerships with athlete alignment and brand activation.</p>
+          </div>
+        </div>
+        <div class="now-item fade-up fade-up-d2">
+          <div class="now-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <div class="now-text">
+            <h4>RTD Growth Is Peaking — Campus Is the Next Channel</h4>
+            <p>Hard seltzer and canned cocktail volume growth is being absorbed by grocery and convenience. The campus channel is the one underserved high-density point of presence left.</p>
+          </div>
+        </div>
+        <div class="now-item fade-up fade-up-d3">
+          <div class="now-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="now-text">
+            <h4>Licensing Offices Are Actively Looking</h4>
+            <p>University licensing and athletic departments are fielding more non-beer beverage inquiries than ever. The demand signal is there. The structured response has not existed — until now.</p>
+          </div>
+        </div>
+        <div class="now-item fade-up fade-up-d4">
+          <div class="now-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="now-text">
+            <h4>Early Partnerships Create Durable Entrenchment</h4>
+            <p>The first operator to structure clean, successful campus partnerships builds institutional credibility that is difficult for a later entrant to replicate. Early is defensible here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOUNDER ===================== -->
+<section id="founder">
+  <div class="container">
+    <div class="founder-inner">
+      <div class="founder-ident fade-up">
+        <div class="founder-avatar">
+          <div class="founder-monogram">MR</div>
+        </div>
+        <div>
+          <div class="founder-name">Miguel Rivera</div>
+          <div class="founder-title">Founder, Partnerships &amp; Operations</div>
+          <div class="founder-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Boca Raton, FL
+          </div>
+        </div>
+      </div>
+
+      <div class="founder-content fade-up fade-up-d2">
+        <span class="label">About the Founder</span>
+        <h2>SwampWater is built by<br>someone who treats<br>this like <em>an operator problem.</em></h2>
+        <p>Miguel Rivera founded SwampWater because he saw a structural gap — not just a product opportunity. University beverage partnerships were being left on the table not for lack of demand, but for lack of a credible operator willing to own the coordination layer between campuses, producers, and distributors.</p>
+        <p>SwampWater is being built from Boca Raton, Florida, through FAU Tech Runway, with a focus on the Southeast — one of the most college-sport-dense, culturally rich markets in the country — before scaling the model nationally.</p>
+        <p>The work is unglamorous. It's licensing conversations, compliance frameworks, co-packer coordination, and distribution negotiations. That's the point. Building durable things requires doing hard operational work before anyone is watching.</p>
+
+        <div class="founder-principles">
+          <div class="principle">
+            <div class="principle-line"></div>
+            <h4>Operator First</h4>
+            <p>SwampWater exists to make complex partnerships work cleanly — not to put a logo on a can and call it a brand.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-line"></div>
+            <h4>Market Before Marketing</h4>
+            <p>Build the structure first. Let the culture follow. This is a platform play, not a brand play.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-line"></div>
+            <h4>Regional Depth, National Vision</h4>
+            <p>Start in the South. Prove the model. Take it everywhere. In that order.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNER CTA ===================== -->
+<section id="partner">
+  <div class="partner-bg"></div>
+  <div class="partner-inner">
+    <span class="label label--light fade-up">Let's Build Something</span>
+    <h2 class="fade-up fade-up-d1">
+      If the opportunity<br>is real, let's<br><em>start the conversation.</em>
+    </h2>
+    <p class="fade-up fade-up-d2">Whether you're a university licensing team, a beverage producer with capacity, a distributor in a college market, or an investor tracking the space — SwampWater is actively building its first round of foundational partnerships.</p>
+    <div class="partner-actions fade-up fade-up-d3">
+      <a href="mailto:partnerships@swampwaterbev.com" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Request Partnership
+      </a>
+      <a href="#how" class="btn btn-outline-light">Review the Model</a>
+    </div>
+    <p class="partner-footer-note fade-up">SwampWater is actively partnering in the Southeastern U.S. and expanding nationwide. Inquiries reviewed personally.</p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">SWAMPWATER</div>
+        <p class="footer-tagline">The university beverage launch platform. Built for campuses, producers, and the channels that connect them.</p>
+        <span class="footer-badge"><span class="footer-badge-dot"></span>Based in Boca Raton, FL — FAU Tech Runway</span>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#why">Why SwampWater</a></li>
+          <li><a href="#launches">Launch Concepts</a></li>
+          <li><a href="#whynow">Why Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Partners</h5>
+        <ul>
+          <li><a href="#serves">Universities</a></li>
+          <li><a href="#serves">Distilleries</a></li>
+          <li><a href="#serves">Distributors</a></li>
+          <li><a href="#serves">Investors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#partner">Request Partnership</a></li>
+          <li><a href="mailto:partnerships@swampwaterbev.com">partnerships@<br>swampwaterbev.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 SwampWater LLC. All rights reserved.</span>
+      <span class="footer-location">Boca Raton, FL · Southeast U.S.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== JS ===================== -->
+<script>
+// Nav scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+nav.classList.toggle('scrolled', window.scrollY > 40);
+
+// Intersection Observer for fade-up
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Tab panels
+function showPanel(id, btn) {
+  document.querySelectorAll('.audience-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.audience-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Ticker duplication (already doubled in HTML, just ensure smooth loop)
+</script>
+
+</body>
+</html>
