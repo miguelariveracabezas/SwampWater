@@ -3,7 +3,7 @@
 
 > *Licensed. Localized. Built to repeat.*
 
-**Live Site:** [miguelariveracabezas.github.io/swampwater](swampwaterco.com)
+**Live Site:** [swampwaterco.com](swampwaterco.com)
 
 ---
 
