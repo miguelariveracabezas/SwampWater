@@ -83,6 +83,9 @@ nav.solid{background:rgba(14,20,42,0.97);backdrop-filter:blur(16px);border-botto
 .stat-n{font-family:var(--ff-d);font-size:46px;font-weight:500;color:var(--gold);line-height:1;margin-bottom:6px}
 .stat-l{font-family:var(--ff-h);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
 .stat-d{font-size:13px;color:rgba(255,255,255,0.4);margin-top:6px;line-height:1.55}
+.hero-product{position:relative;margin-bottom:20px;border-radius:8px;overflow:hidden}
+.hero-product img{width:100%;height:auto;display:block;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 80px rgba(200,137,58,0.12)}
+.hero-product::after{content:"";position:absolute;inset:0;border-radius:8px;border:1px solid rgba(255,255,255,0.08);pointer-events:none}
 .scroll-cue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.25));animation:pulse 2s ease-in-out infinite}
 .scroll-txt{font-family:var(--ff-h);font-size:9px;letter-spacing:0.25em;color:rgba(255,255,255,0.25);text-transform:uppercase}
@@ -322,6 +325,9 @@ footer{background:#080e1e;padding:56px 0 28px}
       </div>
     </div>
     <div class="hero-right up d2">
+      <div class="hero-product">
+        <img src="cooler.png" alt="SwampWater Vodka Seltzer — Watermelon, Black Cherry, Pineapple, Grapefruit — crafted in Florida" />
+      </div>
       <div class="stat-grid">
         <div class="stat">
           <div class="stat-n">900+</div>
