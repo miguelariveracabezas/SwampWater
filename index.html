@@ -92,6 +92,12 @@
     nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy-deep); border-bottom:1px solid var(--border); }
     .nav-w { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:60px; }
     .nav-logo img { height:38px; width:auto; display:block; }
+    .nav-wordmark {
+      font-family: var(--ff-h); font-weight: 900; font-size: 1.4rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--white); text-decoration: none;
+      display: block; line-height: 1;
+    }
     .nav-links { display:flex; list-style:none; gap:2.5rem; align-items:center; }
     .nav-links a { color:var(--cream); text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.6; transition:opacity 0.2s,color 0.2s; }
     .nav-links a:hover { opacity:1; color:var(--orange-lt); }
@@ -112,8 +118,14 @@
     /* HERO */
     #hero { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; padding-top:60px; }
     .hero-text { display:flex; align-items:center; padding:4rem 2rem 4rem 4rem; background:var(--navy-deep); }
-    .hero-visual { position:relative; overflow:hidden; background:var(--navy); }
-    .hero-visual img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero-visual { position:relative; overflow:hidden; background:var(--navy-deep); display:flex; align-items:center; justify-content:center; }
+    .hero-visual img {
+      width:90%; height:auto; object-fit:contain; display:block;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      mix-blend-mode: lighten;
+      filter: drop-shadow(0 0 40px rgba(212,96,26,0.25));
+    }
     h1 { font-family:var(--ff-h); font-weight:900; font-size:clamp(3rem,5.5vw,5.5rem); line-height:0.92; text-transform:uppercase; letter-spacing:0.01em; color:var(--white); margin-bottom:1.25rem; }
     h1 .acc { color:var(--orange); }
     .eyebrow { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange-lt); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; }
@@ -276,17 +288,206 @@
       .footer-links { gap:1.25rem; }
       .footer-copy { flex-direction:column; }
     }
+
+    /* ============================================
+       PREMIUM ANIMATIONS
+    ============================================ */
+
+    /* Cursor glow */
+    .cursor-glow {
+      position: fixed; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,96,26,0.08) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+    }
+
+    /* Nav scroll effect */
+    nav.scrolled {
+      background: rgba(12,21,64,0.98);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+
+    /* Nav link active underline */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--orange);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* Hero text reveal — words slide up */
+    .hero-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60px) skewY(3deg);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .hero-word.vis { opacity: 1; transform: translateY(0) skewY(0); }
+    .hero-line { display: block; overflow: hidden; }
+
+    /* Eyebrow line draw */
+    .eyebrow-line {
+      display: block; width: 0; height: 1px;
+      background: var(--orange); flex-shrink: 0;
+      transition: width 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s;
+    }
+    .eyebrow-line.vis { width: 1.5rem; }
+
+    /* Counter animation */
+    .trust-stat .n { transition: color 0.3s; }
+
+    /* Fade directions */
+    .fade-up   { opacity:0; transform:translateY(30px);  transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left { opacity:0; transform:translateX(-30px); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right{ opacity:0; transform:translateX(30px);  transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .fade-up.vis, .fade-left.vis, .fade-right.vis { opacity:1; transform:translate(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* Card hover glow + lift */
+    .partner-card, .launch-card {
+      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .partner-card:hover {
+      transform: translateY(-4px);
+      background: rgba(26,47,110,0.7);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(212,96,26,0.18);
+    }
+    .launch-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .launch-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(212,96,26,0.18);
+    }
+
+    /* Button shimmer effect */
+    .btn-p { position: relative; overflow: hidden; }
+    .btn-p::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.5s ease;
+    }
+    .btn-p:hover::before { left: 150%; }
+    .btn-p:hover { background: var(--orange-lt); transform: translateY(-1px); box-shadow: 0 8px 25px rgba(212,96,26,0.4); }
+    .btn-s:hover { transform: translateY(-1px); }
+
+    /* Step hover */
+    .step { transition: background 0.2s; border-radius: 4px; padding-left: 0.5rem; padding-right: 0.5rem; margin-left: -0.5rem; margin-right: -0.5rem; }
+    .step:hover { background: rgba(255,255,255,0.03); }
+    .step:hover .step-num { opacity: 0.8; color: var(--orange-lt); }
+    .step-num { transition: opacity 0.2s, color 0.2s; }
+
+    /* Flavor pill hover */
+    .flavor-pill {
+      transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .flavor-pill:hover {
+      background: rgba(212,96,26,0.25);
+      border-color: rgba(212,96,26,0.55);
+      transform: translateY(-2px);
+      color: var(--white);
+    }
+
+    /* FAQ hover */
+    .faq-item { transition: background 0.2s; }
+    .faq-item:hover { background: rgba(26,47,110,0.65); }
+
+    /* Trust stat hover */
+    .trust-stat {
+      transition: transform 0.25s ease;
+      cursor: default;
+    }
+    .trust-stat:hover { transform: translateY(-3px); }
+    .trust-stat:hover .n { color: var(--orange-lt); }
+
+    /* Hero image parallax container */
+    .hero-visual { overflow: hidden; }
+    .hero-visual img { transform: scale(1.05); transition: transform 8s ease-out; will-change: transform; }
+    .hero-visual img.loaded { transform: scale(1); }
+
+    /* Section number labels */
+    .sec-lbl { transition: letter-spacing 0.3s ease; }
+
+    /* Orange accent line sweep on h2 */
+    .h2-wrap { position: relative; display: inline-block; }
+
+    /* CTA section pulse */
+    #cta .btn-w {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #cta .btn-w:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    #cta .btn-ow {
+      transition: transform 0.2s, background 0.2s;
+    }
+    #cta .btn-ow:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* Mobile menu animation */
+    .mobile-menu {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s;
+    }
+    .mobile-menu.open a { opacity: 0.85; transform: translateY(0); }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.20s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-menu.open a:nth-child(6) { transition-delay: 0.30s; }
+
+    /* Scroll progress bar */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: var(--orange); z-index: 200;
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    /* Founder photo reveal */
+    .founder-photo-wrap img {
+      transition: transform 0.5s ease;
+    }
+    .founder-photo-wrap:hover img {
+      transform: scale(1.03);
+    }
   </style>
 </head>
 
 <body>
 
+  <div id="scroll-bar"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
   <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;background:var(--orange);color:#fff;padding:0.5rem 1rem;font-size:0.85rem;">Skip to main content</a>
 
   <nav aria-label="Main navigation">
     <div class="nav-w">
       <a href="/" class="nav-logo" aria-label="SwampWater home">
-        <img src="product.jpeg" alt="SwampWater" width="160" height="38">
+        <span class="nav-wordmark">SwampWater</span>
       </a>
       <ul class="nav-links" role="list">
         <li><a href="#model">The Model</a></li>
@@ -501,7 +702,7 @@
               <div class="founder-credentials">
                 <div class="cred-item"><span>🐊</span><span>Food &amp; Resource Economics, University of Florida</span></div>
                 <div class="cred-item"><span>🥤</span><span>Incoming Summer Analyst, PepsiCo</span></div>
-                <div class="cred-item"><span>📊</span><span>USDA-AFRI Researcher, Applied Econometrics &amp; Commodity Markets — Dr. Jaclyn Kropp &amp; Dr. Fan Fan</span></div>
+                <div class="cred-item"><span>📊</span><span>Researcher, Applied Econometrics &amp; Commodity Markets — Dr. Jaclyn Kropp &amp; Dr. Fan Fan</span></div>
               </div>
               <div class="founder-contact">
                 <a href="tel:+13215141850" class="contact-link"><span>📞</span><span>(321) 514-1850</span></a>
@@ -511,8 +712,8 @@
           </div>
           <div class="founder-content fade-up">
             <h2 id="about-heading">Gatorade Was Invented Here. SwampWater Is Next.</h2>
-            <p>Gatorade was born at the University of Florida. But when it came to an alcoholic drink that actually belonged to Gator Nation, one that fit how students actually drink today, there wasn't one.</p>
-            <p>The idea clicked on a trip down to South Florida. A friend pointed out Paradise Lager at a bar, FAU's official craft beer. The concept was solid. But beer wasn't what people were buying. Seltzers were. RTDs were. The question became obvious: why not take that idea to a bigger stage, with a drink people actually want?</p>
+            <p>Gatorade was born at the University of Florida. But when it came to an alcoholic drink that actually belonged to Gator Nation — one that fit how students actually drink today — there wasn't one.</p>
+            <p>The idea clicked on a trip down to South Florida. A friend pointed out Paradise Lager at a bar — FAU's official craft beer. The concept was solid. But beer wasn't what people were buying. Seltzers were. RTDs were. The question became obvious: why not take that idea to a bigger stage, with a drink people actually want?</p>
             <p>That's SwampWater. A premium vodka seltzer crafted in Florida, built for the campus market that beer has always owned but never fully served.</p>
             <div class="founder-mission">
               <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">🌿</div>
@@ -547,7 +748,7 @@
     <div class="w">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="product.jpeg" alt="SwampWater" width="120" height="30" loading="lazy">
+          <span class="nav-wordmark" style="font-size:1.1rem;opacity:0.75;">SwampWater</span>
         </div>
         <nav aria-label="Footer navigation">
           <ul class="footer-links" role="list">
@@ -567,7 +768,132 @@
     </div>
   </footer>
 
-  <script>
+    <script>
+    // Scroll progress bar
+    const scrollBar = document.getElementById('scroll-bar');
+    window.addEventListener('scroll', () => {
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      scrollBar.style.width = pct + '%';
+    }, { passive: true });
+
+    // Cursor glow (desktop only)
+    const glow = document.getElementById('cursorGlow');
+    if (window.innerWidth > 860) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }, { passive: true });
+    } else {
+      glow.style.display = 'none';
+    }
+
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], div[id="trust"]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const io2 = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = document.querySelector('.nav-links a[href="#' + e.target.id + '"]');
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => io2.observe(s));
+
+    // Hero image zoom-in on load
+    const heroImg = document.querySelector('.hero-visual img');
+    if (heroImg) {
+      if (heroImg.complete) heroImg.classList.add('loaded');
+      else heroImg.addEventListener('load', () => heroImg.classList.add('loaded'));
+    }
+
+    // Hero word-by-word reveal
+    function wrapWords() {
+      const h1 = document.querySelector('h1');
+      if (!h1) return;
+      const lines = h1.querySelectorAll('.hero-line') || [];
+      if (lines.length === 0) {
+        // wrap each text node
+        h1.innerHTML = h1.innerHTML.split('<br>').map(line => {
+          return '<span class="hero-line"><span class="hero-word">' + line.replace('<span class="acc">', '</span><span class="hero-word acc">') + '</span></span>';
+        }).join('');
+      }
+      setTimeout(() => {
+        document.querySelectorAll('.hero-word').forEach((w, i) => {
+          setTimeout(() => w.classList.add('vis'), i * 120);
+        });
+      }, 100);
+
+      // Eyebrow
+      const eyebrow = document.querySelector('.eyebrow');
+      if (eyebrow) {
+        const line = eyebrow.querySelector('.eyebrow::before') || eyebrow;
+        setTimeout(() => eyebrow.style.opacity = '1', 50);
+      }
+
+      // Hero tagline + quote + ctas
+      ['.hero-tagline', '.hero-quote', '.hero-ctas'].forEach((sel, i) => {
+        const el = document.querySelector(sel);
+        if (el) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, 500 + i * 150);
+        }
+      });
+    }
+    wrapWords();
+
+    // Counter animation for trust bar
+    function animateCounter(el, target, suffix) {
+      const isDecimal = target % 1 !== 0;
+      let start = 0;
+      const duration = 1400;
+      const startTime = performance.now();
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const val = Math.round(eased * target);
+        el.textContent = val + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Trust stats counter trigger
+    const trustObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.trust-stat').forEach((stat, i) => {
+            const n = stat.querySelector('.n');
+            if (!n || n.dataset.counted) return;
+            n.dataset.counted = true;
+            const raw = n.textContent.trim();
+            const hasPlus = raw.includes('+');
+            const hasPct = raw.includes('%');
+            const hasMo = raw.toLowerCase().includes('mo');
+            const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+            const suffix = hasPlus ? '+' : hasPct ? '%' : hasMo ? ' Mo' : '';
+            setTimeout(() => animateCounter(n, num, suffix), i * 100);
+          });
+          trustObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    const trustEl = document.getElementById('trust');
+    if (trustEl) trustObserver.observe(trustEl);
+
     // Hamburger menu
     const btn = document.getElementById('burgerBtn');
     const menu = document.getElementById('mobileMenu');
@@ -602,11 +928,31 @@
       });
     });
 
-    // Fade-up animations
+    // Fade-up/left/right scroll reveal with stagger
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('vis');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => io.observe(el));
+
+    // Stagger sibling cards
+    document.querySelectorAll('.partners-grid, .launch-cards, .faq-grid').forEach(grid => {
+      grid.querySelectorAll(':scope > *').forEach((child, i) => {
+        child.style.transitionDelay = (i * 0.08) + 's';
+      });
+    });
+
+    // Steps stagger
+    document.querySelectorAll('.step').forEach((step, i) => {
+      step.classList.add('fade-up');
+      step.style.transitionDelay = (i * 0.1) + 's';
+      io.observe(step);
+    });
+
   </script>
 
 </body>
