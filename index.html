@@ -318,9 +318,11 @@
       padding:5rem 3rem 3rem 2rem;
     }
     .hero-visual img {
-      width:100%; max-width:520px; height:auto;
-      border-radius:8px;
-      box-shadow:0 40px 100px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+      width:100%; max-width:580px; height:auto;
+      border-radius:0;
+      box-shadow:none;
+      mix-blend-mode:normal;
+      background:transparent;
     }
 
     /* TRUST BAR */
@@ -730,9 +732,9 @@
                   <span class="contact-icon">📞</span>
                   <span>(321) 514-1850</span>
                 </a>
-                <a href="mailto:swampwaterventures@gmail.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#6e1d190f031e190f1a0b1c180b001a1b1c0b1d2e09030f0702400d0103" class="contact-link">
                   <span class="contact-icon">✉️</span>
-                  <span>swampwaterventures@gmail.com</span>
+                  <span><span class="__cf_email__" data-cfemail="e49793858994938590819692818a9091968197a48389858d88ca878b89">[email&#160;protected]</span></span>
                 </a>
               </div>
             </div>
@@ -754,7 +756,7 @@
               <span>Starting at UF.</span>
               <span class="vision-accent">The SEC is next.</span>
             </div>
-            <a href="mailto:swampwaterventures@gmail.com" class="btn-p" style="display:inline-block;margin-top:2rem;">Get in Touch with Miguel</a>
+            <a href="/cdn-cgi/l/email-protection#87f4f0e6eaf7f0e6f3e2f5f1e2e9f3f2f5e2f4c7e0eae6eeeba9e4e8ea" class="btn-p" style="display:inline-block;margin-top:2rem;">Get in Touch with Miguel</a>
           </div>
 
         </div>
@@ -768,7 +770,7 @@
           <p>Whether you're a campus venue looking to diversify revenue, a beverage brand seeking university distribution, or a channel partner ready to expand into the college market — SwampWater's university beverage partnership platform is built for you.</p>
         </div>
         <div class="cta-buttons">
-          <a href="mailto:partnerships@swampwaterco.com" class="btn-w">Start a Partnership</a>
+          <a href="/cdn-cgi/l/email-protection#f4849586809a9186879c9d8487b487839599848395809186979bda979b99" class="btn-w">Start a Partnership</a>
           <a href="#model" class="btn-ow">See How It Works</a>
         </div>
       </div>
@@ -789,7 +791,7 @@
             <li><a href="#product">Product</a></li>
             <li><a href="#launches">Launches</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="mailto:partnerships@swampwaterco.com">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#2a5a4b585e444f585942435a596a595d4b475a5d4b5e4f58494504494547">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -800,7 +802,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function tFaq(btn) {
       const item = btn.closest('.faq-item');
       const open = item.classList.contains('open');
@@ -818,22 +820,4 @@
       b.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          tFaq(b);
-        }
-      });
-    });
-
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('vis'), i * 90);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  </script>
-
-</body>
-</html>
+        
