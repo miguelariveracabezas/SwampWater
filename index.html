@@ -127,14 +127,14 @@
     }
     .hero-visual img {
       width:100%; height:100%;
-      object-fit:cover; object-position:center center;
+      object-fit:cover; object-position:35% center;
       display:block;
-      -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
-      mask-image: linear-gradient(to left, black 60%, transparent 100%);
-      filter: saturate(1.1) contrast(1.04) brightness(0.92);
-      transition: transform 8s ease-out;
+      -webkit-mask-image: linear-gradient(to left, black 50%, rgba(0,0,0,0.7) 72%, transparent 100%);
+      mask-image: linear-gradient(to left, black 50%, rgba(0,0,0,0.7) 72%, transparent 100%);
+      filter: saturate(1.15) contrast(1.06) brightness(0.88);
+      transition: transform 10s ease-out;
     }
-    .hero-visual img.loaded { transform: scale(1.03); }
+    .hero-visual img.loaded { transform: scale(1.04); }
     @keyframes floatImg {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-12px); }
@@ -301,47 +301,220 @@
     .fade-up { opacity:0; transform:translateY(20px); transition:opacity 0.55s ease,transform 0.55s ease; }
     .fade-up.vis { opacity:1; transform:translateY(0); }
 
-    /* MOBILE */
+    /* ═══════════════════════════════════════
+       MOBILE — PREMIUM AESTHETIC
+    ═══════════════════════════════════════ */
     @media (max-width:860px) {
       html, body { overflow-x:hidden; }
-      .nav-links { display:none !important; }
-      .nav-burger { display:flex; }
-      .nav-contact-btn { display:none; }
-      .nav-w { padding:0 1.25rem; grid-template-columns:1fr auto; }
+
+      /* ── NAV — clean, minimal bar ── */
+      nav { height:58px; }
+      .nav-w {
+        padding:0 1.5rem;
+        grid-template-columns:auto 1fr auto;
+        height:58px;
+        gap:0;
+      }
       .nav-logo img { height:30px; }
-      #hero { grid-template-columns:1fr; margin-top:56px; min-height:auto; }
-      .hero-text { padding:3rem 1.5rem 2rem; }
-      .hero-visual { padding:1.5rem; }
-      .hero-visual img { max-height:45vw; }
+      .nav-links { display:none !important; }
+      .nav-contact-btn { display:none; }
+      .nav-burger { display:flex; }
 
-      #hero { grid-template-columns:1fr; min-height:auto; padding-top:60px; }
-      .hero-text { padding:3rem 1.5rem 2rem; }
-      .hero-visual { height:55vw; min-height:260px; }
-      h1 { font-size:clamp(2.4rem,10vw,4rem); }
-      h2 { font-size:clamp(2rem,8vw,3rem); }
-      .hero-ctas { flex-direction:column; }
-      .btn-p, .btn-s { text-align:center; }
+      /* ── MOBILE MENU — full screen, luxe ── */
+      .mobile-menu {
+        top:58px;
+        gap:0;
+        padding:3rem 2rem;
+        justify-content:center;
+        align-items:flex-start;
+        background:var(--navy-deep);
+      }
+      .mobile-menu a {
+        font-size:2.6rem;
+        letter-spacing:0.04em;
+        opacity:0.9;
+        padding:0.6rem 0;
+        border-bottom:1px solid var(--border);
+        width:100%;
+      }
+      .mobile-menu a:last-child { border-bottom:none; color:var(--orange-lt); }
 
-      #trust { padding:1.5rem 0; }
-      .trust-w { justify-content:center; gap:1.25rem; }
+      /* ── HERO — full cinematic screen ── */
+      #hero {
+        display:block;
+        position:relative;
+        min-height:100svh;
+        margin-top:0;
+        padding-top:58px;
+        overflow:hidden;
+      }
+      .hero-visual {
+        position:absolute;
+        inset:0; z-index:0;
+        height:100%; width:100%;
+      }
+      .hero-visual img {
+        width:100%; height:100%;
+        object-fit:cover;
+        object-position:55% center;
+        -webkit-mask-image:none !important;
+        mask-image:none !important;
+        filter:saturate(1.2) contrast(1.08) brightness(0.65);
+        transform:none !important;
+        animation:none !important;
+        transition:none !important;
+      }
+      .hero-visual::after {
+        content:'';
+        position:absolute; inset:0;
+        background:
+          linear-gradient(to top,
+            rgba(12,21,64,1) 0%,
+            rgba(12,21,64,0.92) 25%,
+            rgba(12,21,64,0.55) 55%,
+            rgba(12,21,64,0.15) 80%,
+            transparent 100%),
+          linear-gradient(to right,
+            rgba(12,21,64,0.65) 0%,
+            rgba(12,21,64,0.2) 50%,
+            transparent 100%);
+      }
+      .hero-text {
+        position:relative; z-index:2;
+        display:flex; align-items:flex-end;
+        min-height:calc(100svh - 58px);
+        padding:0 1.75rem 4rem;
+        background:transparent;
+      }
+      .hero-text-inner { width:100%; }
+      h1 {
+        font-size:clamp(3.2rem,13.5vw,5rem);
+        line-height:0.87;
+        margin-bottom:1.25rem;
+        letter-spacing:-0.01em;
+      }
+      .eyebrow { margin-bottom:1rem; font-size:0.65rem; opacity:0.9; }
+      .hero-tagline { font-size:0.93rem; max-width:100%; line-height:1.65; margin-bottom:0.75rem; }
+      .hero-quote { font-size:0.86rem; margin-bottom:2rem; }
+      .hero-ctas { flex-direction:column; gap:0.75rem; }
+      .btn-p { text-align:center; padding:1.1rem; font-size:0.8rem; width:100%; border-radius:4px; }
+      .btn-s { text-align:center; padding:1.1rem; font-size:0.8rem; width:100%; }
+
+      /* ── TRUST BAR — horizontal scroll ── */
+      #trust { padding:1.5rem 0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+      .trust-w {
+        display:flex;
+        flex-wrap:nowrap;
+        gap:0;
+        padding:0;
+        min-width:max-content;
+        justify-content:flex-start;
+        padding:0 1.5rem;
+      }
+      .trust-stat {
+        padding:0 1.5rem;
+        border-right:1px solid var(--border);
+        flex-shrink:0;
+      }
+      .trust-stat:last-child { border-right:none; }
       .trust-div { display:none; }
-      .trust-stat .n { font-size:1.8rem; }
+      .trust-stat .n { font-size:1.9rem; }
+      .trust-stat .l { font-size:0.62rem; white-space:nowrap; }
 
+      /* ── SECTIONS ── */
       section { padding:4rem 0; }
-      .w { padding:0 1.25rem; }
+      .w { padding:0 1.5rem; }
+      h2 { font-size:clamp(2.2rem,9.5vw,3.2rem); line-height:0.9; margin-bottom:1.25rem; }
+      h3 { font-size:1.05rem; }
+      p { font-size:0.93rem; }
 
-      .model-grid, .product-grid, .founder-grid { grid-template-columns:1fr; gap:2.5rem; }
-      .partners-grid, .launch-cards { grid-template-columns:1fr; }
+      /* ── MODEL ── */
+      .model-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .step {
+        grid-template-columns:3rem 1fr;
+        gap:1rem;
+        padding:1.5rem 0;
+      }
+      .step-num { font-size:1.8rem; }
+      .step p { font-size:0.88rem; }
+
+      /* ── PARTNERS ── cards swipe horizontally ── */
+      .partners-grid {
+        display:flex;
+        flex-direction:column;
+        gap:1px;
+        background:var(--border);
+        border-radius:8px;
+        overflow:hidden;
+      }
+      .partner-card { padding:2rem 1.5rem; background:var(--navy-deep); }
+
+      /* ── PRODUCT ── */
+      .product-grid { grid-template-columns:1fr; gap:2rem; }
+      .product-img-wrap { max-width:100%; }
+      .product-img-wrap img { border-radius:10px; }
+      .product-img-wrap::before { inset:-20px; }
+      .product-meta { gap:2rem; margin:1.25rem 0; }
+      .meta-val { font-size:1.8rem; }
+      .meta-key { font-size:0.65rem; }
+      .flavor-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
+      .flavor-pill { font-size:0.75rem; padding:0.65rem 0.7rem; }
+
+      /* ── LAUNCHES ── */
+      .launch-cards {
+        display:flex;
+        flex-direction:column;
+        gap:1px;
+        background:var(--border);
+        border-radius:8px;
+        overflow:hidden;
+      }
+      .launch-card { padding:1.75rem 1.5rem; background:var(--navy-deep); }
+      .launch-metric strong { font-size:2rem; }
+
+      /* ── FAQ ── */
       .faq-grid { grid-template-columns:1fr; }
+      .faq-item { padding:1.25rem 1.25rem; }
+      .faq-q { font-size:0.88rem; line-height:1.45; }
+
+      /* ── FOUNDER ── */
+      .founder-grid { grid-template-columns:1fr; gap:2rem; }
+      .founder-photo-wrap {
+        max-width:100%;
+        aspect-ratio:3/4;
+        border-radius:10px;
+      }
+      .founder-card {
+        max-width:100%;
+        padding:1.25rem;
+      }
+      .founder-name { font-size:1.3rem; }
+      .cred-item { font-size:0.81rem; }
+      .founder-content p { font-size:0.92rem; }
+      .founder-vision { font-size:1.35rem; }
+      .founder-mission { padding:1rem; }
+
+      /* ── CTA ── */
+      #cta { padding:4rem 0; }
       #cta .w { grid-template-columns:1fr; gap:2rem; }
-      .cta-buttons { flex-direction:row; flex-wrap:wrap; }
+      #cta h2 { font-size:clamp(2rem,9vw,3rem); }
+      .cta-buttons { flex-direction:column; gap:0.75rem; width:100%; }
+      .btn-w, .btn-ow { padding:1rem; font-size:0.8rem; text-align:center; }
 
-      .founder-photo-wrap, .founder-card { max-width:100%; }
-
-      footer { padding:2rem 0; }
-      .footer-inner { flex-direction:column; align-items:flex-start; gap:1rem; }
+      /* ── FOOTER ── */
+      footer { padding:2.5rem 0; }
+      .footer-inner { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+      .footer-brand img { height:28px; }
       .footer-links { gap:1.25rem; }
-      .footer-copy { flex-direction:column; }
+      .footer-links a { font-size:0.8rem; }
+      .footer-copy { flex-direction:column; gap:0.5rem; font-size:0.71rem; line-height:1.6; }
+    }
+
+    /* ── iPhone SE / very small ── */
+    @media (max-width:375px) {
+      h1 { font-size:clamp(2.6rem,12.5vw,3.8rem); }
+      .hero-text { padding:0 1.25rem 3rem; }
+      .w { padding:0 1.25rem; }
     }
 
     /* ============================================
@@ -760,7 +933,7 @@
               </div>
               <div class="founder-contact">
                 <a href="tel:+13215141850" class="contact-link"><span>📞</span><span>(321) 514-1850</span></a>
-                <a href="mailto:swampwaterventures@gmail.com" class="contact-link"><span>✉️</span><span>swampwaterventures@gmail.com</span></a>
+                <a href="/cdn-cgi/l/email-protection#7a090d1b170a0d1b0e1f080c1f140e0f081f093a1d171b131654191517" class="contact-link"><span>✉️</span><span><span class="__cf_email__" data-cfemail="017276606c71766075647377646f757473647241666c60686d2f626e6c">[email&#160;protected]</span></span></a>
               </div>
             </div>
           </div>
@@ -777,7 +950,7 @@
               </div>
             </div>
             <div class="founder-vision"><span>Starting at UF.</span><span class="vision-accent">The SEC is next.</span></div>
-            <a href="mailto:swampwaterventures@gmail.com" class="btn-p" style="display:inline-block;margin-top:2rem;">Get in Touch with Miguel</a>
+            <a href="/cdn-cgi/l/email-protection#a4d7d3c5c9d4d3c5d0c1d6d2c1cad0d1d6c1d7e4c3c9c5cdc88ac7cbc9" class="btn-p" style="display:inline-block;margin-top:2rem;">Get in Touch with Miguel</a>
           </div>
         </div>
       </div>
@@ -790,7 +963,7 @@
           <p>Whether you're a campus venue looking to diversify revenue, a beverage brand seeking university distribution, or a channel partner ready to expand — SwampWater's university beverage partnership platform is built for you.</p>
         </div>
         <div class="cta-buttons">
-          <a href="mailto:swampwaterventures@gmail.com" class="btn-w">Start a Partnership</a>
+          <a href="/cdn-cgi/l/email-protection#1a696d7b776a6d7b6e7f686c7f746e6f687f695a7d777b737634797577" class="btn-w">Start a Partnership</a>
           <a href="#model" class="btn-ow">See How It Works</a>
         </div>
       </div>
@@ -811,7 +984,7 @@
             <li><a href="#product">Product</a></li>
             <li><a href="#launches">Launches</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="mailto:swampwaterventures@gmail.com">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#cfbcb8aea2bfb8aebbaabdb9aaa1bbbabdaabc8fa8a2aea6a3e1aca0a2">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -822,7 +995,7 @@
     </div>
   </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Scroll progress bar
     const scrollBar = document.getElementById('scroll-bar');
     window.addEventListener('scroll', () => {
@@ -994,20 +1167,4 @@
     document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => io.observe(el));
 
     // Stagger sibling cards
-    document.querySelectorAll('.partners-grid, .launch-cards, .faq-grid').forEach(grid => {
-      grid.querySelectorAll(':scope > *').forEach((child, i) => {
-        child.style.transitionDelay = (i * 0.08) + 's';
-      });
-    });
-
-    // Steps stagger
-    document.querySelectorAll('.step').forEach((step, i) => {
-      step.classList.add('fade-up');
-      step.style.transitionDelay = (i * 0.1) + 's';
-      io.observe(step);
-    });
-
-  </script>
-
-</body>
-</html>
+    document.querySelectorAll('.partners-grid, .launc
