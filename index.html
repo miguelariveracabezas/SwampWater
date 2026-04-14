@@ -90,7 +90,7 @@
 
     /* NAV */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy-deep); border-bottom:1px solid var(--border); height:64px; display:flex; align-items:center; }
-    .nav-w { max-width:1280px; margin:0 auto; padding:0 2.5rem; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; height:64px; }
+    .nav-w { max-width:1280px; margin:0 auto; padding:0 2.5rem; display:grid; grid-template-columns:auto 1fr auto; align-items:center; height:64px; gap:1rem; }
     .nav-logo img { height:36px; width:auto; display:block; }
     .nav-links { display:flex; list-style:none; gap:2.8rem; align-items:center; justify-content:center; }
     .nav-links a { color:var(--cream); text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.6; transition:opacity 0.2s,color 0.2s; }
@@ -107,8 +107,8 @@
     .nav-burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
     /* MOBILE MENU OVERLAY */
-    .mobile-menu { display:none; position:fixed; inset:0; top:60px; background:var(--navy-deep); z-index:99; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
-    .mobile-menu.open { display:flex; }
+    .mobile-menu { display:flex; position:fixed; inset:0; top:60px; background:var(--navy-deep); z-index:99; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; visibility:hidden; pointer-events:none; }
+    .mobile-menu.open { visibility:visible; pointer-events:all; }
     .mobile-menu a { color:var(--cream); text-decoration:none; font-family:var(--ff-h); font-weight:900; font-size:2rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.8; }
     .mobile-menu a:hover { color:var(--orange-lt); opacity:1; }
 
@@ -307,23 +307,27 @@
       .nav-links { display:none !important; }
       .nav-burger { display:flex; }
       .nav-contact-btn { display:none; }
-      .nav-w { padding:0 1.25rem; grid-template-columns:1fr auto; }
+      .nav-w { padding:0 1.25rem; grid-template-columns:auto auto; justify-content:space-between; }
       .nav-logo img { height:30px; }
-      #hero { grid-template-columns:1fr; margin-top:56px; min-height:auto; }
-      .hero-text { padding:3rem 1.5rem 2rem; }
-      .hero-visual { padding:1.5rem; }
-      .hero-visual img { max-height:45vw; }
 
-      #hero { grid-template-columns:1fr; min-height:auto; padding-top:60px; }
+      /* Hero: single column, image below text */
+      #hero { grid-template-columns:1fr; margin-top:64px; min-height:auto; padding-top:0; }
       .hero-text { padding:3rem 1.5rem 2rem; }
-      .hero-visual { height:55vw; min-height:260px; }
+      .hero-visual { height:55vw; min-height:240px; }
+      /* Flip mask to top-to-bottom when image is below text */
+      .hero-visual img {
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        max-height:none;
+      }
       h1 { font-size:clamp(2.4rem,10vw,4rem); }
       h2 { font-size:clamp(2rem,8vw,3rem); }
       .hero-ctas { flex-direction:column; }
-      .btn-p, .btn-s { text-align:center; }
+      .btn-p, .btn-s { text-align:center; min-height:48px; display:flex; align-items:center; justify-content:center; }
 
+      /* Trust bar: 3-column grid on tablet, wraps naturally */
       #trust { padding:1.5rem 0; }
-      .trust-w { justify-content:center; gap:1.25rem; }
+      .trust-w { justify-content:center; gap:1.25rem 2rem; }
       .trust-div { display:none; }
       .trust-stat .n { font-size:1.8rem; }
 
@@ -333,15 +337,51 @@
       .model-grid, .product-grid, .founder-grid { grid-template-columns:1fr; gap:2.5rem; }
       .partners-grid, .launch-cards { grid-template-columns:1fr; }
       .faq-grid { grid-template-columns:1fr; }
+
+      /* On mobile, show product image first (before text) */
+      .product-grid { display:flex; flex-direction:column; }
+      .product-img-wrap { order:0; }
+      .product-content { order:1; }
+
       #cta .w { grid-template-columns:1fr; gap:2rem; }
       .cta-buttons { flex-direction:row; flex-wrap:wrap; }
+      .btn-w, .btn-ow { min-height:48px; display:flex; align-items:center; justify-content:center; }
 
       .founder-photo-wrap, .founder-card { max-width:100%; }
+
+      /* FAQ touch targets */
+      .faq-q { min-height:48px; align-items:center; }
 
       footer { padding:2rem 0; }
       .footer-inner { flex-direction:column; align-items:flex-start; gap:1rem; }
       .footer-links { gap:1.25rem; }
       .footer-copy { flex-direction:column; }
+    }
+
+    /* Extra-small phones (iPhone SE etc) */
+    @media (max-width:420px) {
+      .nav-w { padding:0 1rem; }
+      .w { padding:0 1rem; }
+      h1 { font-size:clamp(2rem,12vw,3rem); }
+      h2 { font-size:clamp(1.8rem,10vw,2.6rem); }
+      .hero-text { padding:2.25rem 1rem 1.5rem; }
+      .hero-visual { height:60vw; min-height:200px; }
+      .hero-tagline { font-size:0.92rem; }
+      .trust-w { display:grid; grid-template-columns:1fr 1fr; gap:1rem 1.5rem; }
+      .trust-stat { text-align:center; }
+      .trust-stat .n { font-size:1.6rem; }
+      .partner-card { padding:1.75rem 1.25rem; }
+      .launch-card { padding:1.5rem 1.25rem; }
+      .product-meta { gap:1.5rem; }
+      .meta-val { font-size:1.6rem; }
+      .flavor-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
+      .faq-item { padding:1.25rem 1rem; }
+      #cta { padding:4rem 0; }
+      .cta-buttons { flex-direction:column; }
+      .btn-w, .btn-ow { width:100%; }
+      .footer-links { gap:1rem; flex-direction:column; }
+      .mobile-menu { gap:2rem; }
+      .mobile-menu a { font-size:1.6rem; }
     }
 
     /* ============================================
@@ -495,13 +535,11 @@
     .mobile-menu {
       opacity: 0;
       transform: translateY(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
     }
     .mobile-menu.open {
       opacity: 1;
       transform: translateY(0);
-      pointer-events: all;
     }
     .mobile-menu a {
       opacity: 0;
@@ -542,6 +580,11 @@
 
   <nav aria-label="Main navigation">
     <div class="nav-w">
+      <div class="nav-logo">
+        <a href="#hero" style="text-decoration:none;">
+          <span class="nav-wordmark" style="font-family:var(--ff-h);font-weight:900;font-size:1.15rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--white);">SwampWater</span>
+        </a>
+      </div>
 
       <ul class="nav-links" role="list">
         <li><a href="#model">The Model</a></li>
