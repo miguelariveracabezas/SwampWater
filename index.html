@@ -704,6 +704,85 @@
       transform: scale(1.04);
       filter: saturate(1.3) contrast(1.08) brightness(1.05);
     }
+
+    /* ═══════════════════════════════════════════
+       PREMIUM TRANSITIONS & DEPTH v2
+    ═══════════════════════════════════════════ */
+
+    /* ── Scroll reveal base states ── */
+    .reveal-up    { opacity:0; transform:translateY(50px); transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left  { opacity:0; transform:translateX(-60px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right { opacity:0; transform:translateX(60px);  transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-scale { opacity:0; transform:scale(0.88);        transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-clip  { clip-path:inset(0 100% 0 0); transition:clip-path 0.85s cubic-bezier(0.77,0,0.18,1); }
+    .reveal-up.in, .reveal-left.in, .reveal-right.in, .reveal-scale.in { opacity:1; transform:none; }
+    .reveal-clip.in { clip-path:inset(0 0% 0 0); }
+
+    /* stagger delays */
+    .sd-1 { transition-delay:0.08s; }
+    .sd-2 { transition-delay:0.16s; }
+    .sd-3 { transition-delay:0.24s; }
+    .sd-4 { transition-delay:0.32s; }
+    .sd-5 { transition-delay:0.40s; }
+    .sd-6 { transition-delay:0.48s; }
+
+    /* ── H2 clip-path wipe ── */
+    h2.wipe { clip-path:inset(0 101% 0 0); transition:clip-path 0.9s cubic-bezier(0.77,0,0.18,1); }
+    h2.wipe.in { clip-path:inset(0 0% 0 0); }
+    /* Safety fallback — never leave text invisible */
+    h2 { min-height:1em; }
+
+    /* ── Parallax hero ── */
+    .hero-visual { will-change:transform; }
+
+    /* ── 3D card tilt ── */
+    .partner-card, .launch-card, .faq-item {
+      transform-style: preserve-3d;
+      perspective: 800px;
+      will-change: transform;
+    }
+
+    /* ── Btn-s border fill on hover ── */
+    .btn-s {
+      position:relative; overflow:hidden;
+      border:1px solid rgba(255,255,255,0.28);
+      z-index:0;
+    }
+    .btn-s::before {
+      content:''; position:absolute; inset:0;
+      background:var(--orange);
+      transform:scaleX(0); transform-origin:left;
+      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      z-index:-1;
+    }
+    .btn-s:hover::before { transform:scaleX(1); }
+    .btn-s:hover { color:var(--white); border-color:var(--orange); }
+
+    /* ── Btn-p click press ── */
+    .btn-p:active { transform:scale(0.97) !important; }
+
+    /* ── Section warm/cool background shift ── */
+    body { transition:background-color 0.6s ease; }
+    body.warm-bg { background-color:#100d08; }
+
+    /* ── Step stagger ── */
+    .step.reveal-up { border-bottom:1px solid var(--border); }
+
+    /* ── Trust bar entrance ── */
+    .trust-stat.reveal-up { }
+
+    /* ── Section divider line animation ── */
+    .sec-lbl::before {
+      transition: width 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s;
+      width:0;
+    }
+    .sec-lbl.in::before { width:1.5rem; }
+
+    /* Mobile: no parallax, lighter tilt */
+    @media (max-width:860px) {
+      .hero-visual { will-change:auto; }
+      .partner-card, .launch-card, .faq-item { perspective:none; }
+    }
   </style>
 </head>
 
