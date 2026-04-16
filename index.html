@@ -13,9 +13,12 @@
   <meta property="og:title" content="SwampWater — University Beverage Partnership Platform">
   <meta property="og:description" content="Beer has the campus. Everything else is unclaimed. SwampWater connects campuses, beverage brands, and channel partners through localized, repeatable launch models.">
   <meta property="og:image" content="https://swampwaterco.com/hero-2.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="SwampWater">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SwampWater — University Beverage Partnership Platform">
+  <meta name="twitter:description" content="Beer has the campus. Everything else is unclaimed. SwampWater connects campuses, beverage brands, and channel partners through localized, repeatable launch models.">
   <meta name="twitter:image" content="https://swampwaterco.com/hero-2.jpeg">
 
     <script type="application/ld+json">
@@ -28,7 +31,7 @@
         "name": "SwampWater",
         "legalName": "SwampWater Structures LLC",
         "url": "https://swampwaterco.com",
-        "logo": { "@type": "ImageObject", "url": "https://swampwaterco.com/product.jpeg" },
+        "logo": { "@type": "ImageObject", "url": "https://swampwaterco.com/product.jpeg", "width": 130, "height": 34 },
         "description": "SwampWater is a pre-launch university RTD beverage partnership platform connecting campuses, beverage brands, and regional distributors across the SEC. Based in Gainesville, Florida.",
         "foundingLocation": { "@type": "Place", "name": "Gainesville, Florida, United States" },
         "areaServed": ["University of Florida", "Southeastern Conference", "Florida", "Southeast United States"],
@@ -117,28 +120,33 @@
     body { font-family:var(--ff-b); background:var(--navy-deep); color:var(--cream); overflow-x:hidden; line-height:1.6; }
 
     /* NAV */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy-deep); border-bottom:1px solid var(--border); height:64px; display:flex; align-items:center; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy-deep); border-bottom:1px solid var(--border); height:64px; display:flex; align-items:center; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
     .nav-w { max-width:1280px; margin:0 auto; padding:0 2.5rem; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; height:64px; }
-    .nav-logo img { height:36px; width:auto; display:block; }
+    .nav-logo img { height:36px; width:auto; display:block; transition: transform 0.3s ease; }
+    .nav-logo:hover img { transform: scale(1.05); }
     .nav-links { display:flex; list-style:none; gap:2.8rem; align-items:center; justify-content:center; }
-    .nav-links a { color:var(--cream); text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.6; transition:opacity 0.2s,color 0.2s; }
+    .nav-links a { color:var(--cream); text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.6; transition:opacity 0.3s cubic-bezier(0.16,1,0.3,1), color 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--orange), var(--orange-lt)); transition: width 0.4s cubic-bezier(0.16,1,0.3,1); }
     .nav-links a:hover { opacity:1; color:var(--orange-lt); }
+    .nav-links a:hover::after { width: 100%; }
     .nav-right { display:flex; align-items:center; gap:1rem; justify-content:flex-end; }
-    .nav-contact-btn { background:var(--orange); color:var(--white); padding:0.5rem 1.4rem; border-radius:999px; font-size:0.76rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:background 0.2s, transform 0.2s; }
-    .nav-contact-btn:hover { background:var(--orange-lt); transform:translateY(-1px); }
+    .nav-contact-btn { background:var(--orange); color:var(--white); padding:0.5rem 1.4rem; border-radius:999px; font-size:0.76rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .nav-contact-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); transform: translateX(-100%); transition: transform 0.5s ease; }
+    .nav-contact-btn:hover { background:var(--orange-lt); transform:translateY(-2px); box-shadow: 0 8px 24px rgba(212,96,26,0.4); }
+    .nav-contact-btn:hover::before { transform: translateX(100%); }
 
     /* HAMBURGER */
-    .nav-burger { display:none; background:none; border:none; cursor:pointer; padding:8px; flex-direction:column; gap:5px; }
-    .nav-burger span { display:block; width:24px; height:2px; background:var(--cream); border-radius:2px; transition:all 0.3s; }
+    .nav-burger { display:none; background:none; border:none; cursor:pointer; padding:8px; flex-direction:column; gap:5px; transition: all 0.3s ease; }
+    .nav-burger span { display:block; width:24px; height:2px; background:var(--cream); border-radius:2px; transition:all 0.4s cubic-bezier(0.16,1,0.3,1); }
     .nav-burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
     .nav-burger.open span:nth-child(2) { opacity:0; }
     .nav-burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
     /* MOBILE MENU OVERLAY */
-    .mobile-menu { display:none; position:fixed; inset:0; top:60px; background:var(--navy-deep); z-index:99; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
+    .mobile-menu { display:none; position:fixed; inset:0; top:60px; background:var(--navy-deep); z-index:99; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; backdrop-filter: blur(4px); }
     .mobile-menu.open { display:flex; }
-    .mobile-menu a { color:var(--cream); text-decoration:none; font-family:var(--ff-h); font-weight:900; font-size:2rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.8; }
-    .mobile-menu a:hover { color:var(--orange-lt); opacity:1; }
+    .mobile-menu a { color:var(--cream); text-decoration:none; font-family:var(--ff-h); font-weight:900; font-size:2rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.8; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu a:hover { color:var(--orange-lt); opacity:1; transform: scale(1.05); }
 
     /* HERO */
     #hero { display:grid; grid-template-columns:1fr 1fr; min-height:calc(100vh - 64px); margin-top:64px; position:relative; overflow:hidden; }
@@ -148,8 +156,17 @@
         radial-gradient(ellipse 55% 60% at 72% 55%, rgba(60,35,15,0.35) 0%, transparent 65%),
         radial-gradient(ellipse 40% 50% at 78% 40%, rgba(212,96,26,0.08) 0%, transparent 55%);
       pointer-events:none; z-index:0;
+      animation: bgShift 8s ease-in-out infinite;
     }
-    .hero-text { display:flex; align-items:center; padding:5rem 3rem 5rem 5rem; background:transparent; position:relative; z-index:1; }
+    @keyframes bgShift {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .hero-text { display:flex; align-items:center; padding:5rem 3rem 5rem 5rem; background:transparent; position:relative; z-index:1; animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
     .hero-visual {
       position:relative; z-index:1; overflow:hidden;
     }
@@ -160,38 +177,56 @@
       -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
       mask-image: linear-gradient(to left, black 60%, transparent 100%);
       filter: saturate(1.1) contrast(1.04) brightness(0.92);
-      transition: transform 8s ease-out;
+      transition: transform 8s cubic-bezier(0.16,1,0.3,1);
+      animation: slideInRight 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px) scale(1.1); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
     }
     .hero-visual img.loaded { transform: scale(1.03); }
     @keyframes floatImg {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+      50% { transform: translateY(-8px); }
     }
+    .hero-visual img.loaded { animation: floatImg 4s ease-in-out infinite; }
     h1 { font-family:var(--ff-h); font-weight:900; font-size:clamp(3rem,5.5vw,5.5rem); line-height:0.92; text-transform:uppercase; letter-spacing:0.01em; color:var(--white); margin-bottom:1.25rem; }
     h1 .acc { color:var(--orange); }
-    .eyebrow { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange-lt); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; }
+    .eyebrow { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange-lt); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; opacity: 0; animation: fadeInUp 0.6s ease 0.2s forwards; }
     .eyebrow::before { content:''; display:block; width:1.5rem; height:1px; background:var(--orange); flex-shrink:0; }
-    .hero-tagline { color:var(--muted); font-size:1rem; margin-bottom:1rem; max-width:460px; }
-    .hero-quote { font-style:italic; color:var(--orange-lt); font-size:0.93rem; margin-bottom:2rem; }
-    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
-    .btn-p { display:inline-block; background:var(--orange); color:var(--white); padding:0.9rem 2rem; text-decoration:none; font-weight:500; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; transition:background 0.2s; }
-    .btn-p:hover { background:var(--orange-lt); }
-    .btn-s { display:inline-block; border:1px solid rgba(255,255,255,0.28); color:var(--cream); padding:0.9rem 2rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; transition:background 0.2s; }
-    .btn-s:hover { background:rgba(255,255,255,0.07); }
+    .hero-tagline { color:var(--muted); font-size:1rem; margin-bottom:1rem; max-width:460px; opacity: 0; animation: fadeInUp 0.6s ease 0.4s forwards; }
+    .hero-quote { font-style:italic; color:var(--orange-lt); font-size:0.93rem; margin-bottom:2rem; opacity: 0; animation: fadeInUp 0.6s ease 0.6s forwards; }
+    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; opacity: 0; animation: fadeInUp 0.6s ease 0.8s forwards; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .btn-p { display:inline-block; background:var(--orange); color:var(--white); padding:0.9rem 2rem; text-decoration:none; font-weight:500; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .btn-p::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent); transform: translateX(-100%) translateY(-100%); transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .btn-p:hover { background:var(--orange-lt); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(212,96,26,0.45); }
+    .btn-p:hover::before { transform: translateX(100%) translateY(100%); }
+    .btn-p:active { transform: scale(0.95); }
+    .btn-s { display:inline-block; border:1px solid rgba(255,255,255,0.28); color:var(--cream); padding:0.9rem 2rem; text-decoration:none; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .btn-s::before { content: ''; position: absolute; inset: 0; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: -1; }
+    .btn-s:hover { background:rgba(255,255,255,0.07); border-color: var(--orange); color: var(--white); }
+    .btn-s:hover::before { transform: scaleX(1); }
 
     /* TRUST BAR */
     #trust { background:var(--navy); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:2rem 0; }
     .trust-w { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
-    .trust-stat { text-align:center; }
-    .trust-stat .n { font-family:var(--ff-h); font-weight:900; font-size:2.4rem; color:var(--orange); line-height:1; text-transform:uppercase; }
+    .trust-stat { text-align:center; transition: all 0.3s ease; }
+    .trust-stat:hover { transform: translateY(-4px); }
+    .trust-stat .n { font-family:var(--ff-h); font-weight:900; font-size:2.4rem; color:var(--orange); line-height:1; text-transform:uppercase; transition: color 0.3s ease; }
+    .trust-stat:hover .n { color: var(--orange-lt); text-shadow: 0 0 20px rgba(232,120,58,0.4); }
     .trust-stat .l { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:0.2rem; }
     .trust-div { width:1px; height:40px; background:var(--border); }
 
     /* SHARED */
     section { padding:7rem 0; position:relative; z-index:1; }
     .w { max-width:1200px; margin:0 auto; padding:0 2rem; }
-    .sec-lbl { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange-lt); margin-bottom:0.9rem; display:flex; align-items:center; gap:0.75rem; }
-    .sec-lbl::before { content:''; display:block; width:1.5rem; height:1px; background:var(--orange); }
+    .sec-lbl { font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange-lt); margin-bottom:0.9rem; display:flex; align-items:center; gap:0.75rem; animation: slideInLeft 0.6s ease; }
+    .sec-lbl::before { content:''; display:block; width:1.5rem; height:1px; background:var(--orange); transition: width 0.4s ease; }
+    .sec-lbl:hover::before { width: 2rem; }
     h2 { font-family:var(--ff-h); font-weight:900; text-transform:uppercase; font-size:clamp(2.2rem,4vw,3.6rem); line-height:0.93; color:var(--white); margin-bottom:1.5rem; }
     h3 { font-family:var(--ff-h); font-weight:700; font-size:1.2rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--white); margin-bottom:0.5rem; }
     p { color:var(--muted); line-height:1.75; }
@@ -200,9 +235,11 @@
     #model { background:var(--navy); }
     .model-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
     .model-intro p { margin-bottom:1rem; font-size:0.96rem; }
-    .step { display:grid; grid-template-columns:2.8rem 1fr; gap:1.25rem; padding:1.75rem 0; border-bottom:1px solid var(--border); align-items:start; }
+    .step { display:grid; grid-template-columns:2.8rem 1fr; gap:1.25rem; padding:1.75rem 0; border-bottom:1px solid var(--border); align-items:start; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); border-radius: 4px; margin: 0 -0.5rem; padding: 1.75rem 0.5rem; }
     .step:last-child { border-bottom:none; }
-    .step-num { font-family:var(--ff-h); font-weight:900; font-size:2rem; color:var(--orange); opacity:0.4; line-height:1; }
+    .step:hover { background: rgba(212,96,26,0.08); }
+    .step-num { font-family:var(--ff-h); font-weight:900; font-size:2rem; color:var(--orange); opacity:0.4; line-height:1; transition: all 0.3s ease; }
+    .step:hover .step-num { opacity: 1; color: var(--orange-lt); }
     .step p { font-size:0.87rem; }
 
     /* SERVES */
@@ -210,12 +247,18 @@
     .serves-intro { max-width:620px; margin-bottom:4rem; }
     .serves-intro p { font-size:1rem; margin-top:1rem; }
     .partners-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border-radius:6px; overflow:hidden; }
-    .partner-card { background:var(--navy-deep); padding:2.5rem 2rem; }
-    .p-icon { width:44px; height:44px; background:var(--orange-glow); border:1px solid rgba(212,96,26,0.22); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:1.25rem; }
+    .partner-card { background:var(--navy-deep); padding:2.5rem 2rem; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .partner-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,96,26,0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
+    .partner-card:hover { transform: translateY(-6px); background:rgba(26,47,110,0.7); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,96,26,0.25), inset 0 0 20px rgba(212,96,26,0.1); }
+    .partner-card:hover::before { opacity: 1; }
+    .p-icon { width:44px; height:44px; background:var(--orange-glow); border:1px solid rgba(212,96,26,0.22); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:1.25rem; transition: all 0.3s ease; }
+    .partner-card:hover .p-icon { background: rgba(212,96,26,0.3); border-color: rgba(212,96,26,0.5); transform: scale(1.1) rotate(5deg); }
     .partner-card p { font-size:0.86rem; line-height:1.65; }
     .partner-card ul { list-style:none; margin-top:1.1rem; display:flex; flex-direction:column; gap:0.4rem; }
-    .partner-card ul li { font-size:0.8rem; color:rgba(232,237,245,0.42); padding-left:1rem; position:relative; }
-    .partner-card ul li::before { content:'→'; position:absolute; left:0; color:var(--orange); font-size:0.72rem; }
+    .partner-card ul li { font-size:0.8rem; color:rgba(232,237,245,0.42); padding-left:1rem; position:relative; transition: all 0.2s ease; }
+    .partner-card:hover ul li { color: rgba(232,237,245,0.7); }
+    .partner-card ul li::before { content:'→'; position:absolute; left:0; color:var(--orange); font-size:0.72rem; transition: all 0.3s ease; }
+    .partner-card:hover ul li::before { left: 4px; }
 
     /* PRODUCT */
     #product { background:var(--navy); }
@@ -229,7 +272,7 @@
     }
     @keyframes pulseGlow {
       0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.05); }
+      50% { opacity: 1; transform: scale(1.08); }
     }
     .product-img-wrap img {
       width:100%; height:auto; border-radius:12px; position:relative; z-index:1;
@@ -238,43 +281,56 @@
         0 0 0 1px rgba(212,96,26,0.15),
         0 0 60px rgba(212,96,26,0.2);
       filter: saturate(1.3) contrast(1.06) brightness(1.04);
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, filter 0.5s ease;
+      transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
     }
     .product-img-wrap:hover img {
-      transform: scale(1.03) translateY(-6px);
+      transform: scale(1.05) translateY(-8px);
       box-shadow:
-        0 50px 100px rgba(0,0,0,0.7),
-        0 0 0 1px rgba(212,96,26,0.3),
-        0 0 100px rgba(212,96,26,0.35);
-      filter: saturate(1.45) contrast(1.1) brightness(1.08);
+        0 50px 120px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(212,96,26,0.4),
+        0 0 120px rgba(212,96,26,0.4);
+      filter: saturate(1.5) contrast(1.12) brightness(1.1);
     }
     .product-content p { margin-bottom:1rem; font-size:0.96rem; }
     .product-meta { display:flex; gap:2.5rem; margin:1.5rem 0; }
-    .meta-val { font-family:var(--ff-h); font-weight:900; font-size:2rem; color:var(--white); line-height:1; }
+    .meta-val { font-family:var(--ff-h); font-weight:900; font-size:2rem; color:var(--white); line-height:1; transition: all 0.3s ease; }
+    .meta-val:hover { color: var(--orange-lt); }
     .meta-key { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:0.2rem; }
     .flavor-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin:1.75rem 0; }
-    .flavor-pill { border:1px solid rgba(212,96,26,0.28); border-radius:3px; padding:0.6rem 0.9rem; font-size:0.8rem; color:var(--orange-lt); text-align:center; letter-spacing:0.06em; background:var(--orange-glow); text-transform:uppercase; }
+    .flavor-pill { border:1px solid rgba(212,96,26,0.28); border-radius:3px; padding:0.6rem 0.9rem; font-size:0.8rem; color:var(--orange-lt); text-align:center; letter-spacing:0.06em; background:var(--orange-glow); text-transform:uppercase; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); cursor: pointer; }
+    .flavor-pill:hover { background: rgba(212,96,26,0.25); border-color: rgba(212,96,26,0.55); transform: translateY(-3px) scale(1.05); color: var(--white); box-shadow: 0 8px 20px rgba(212,96,26,0.2); }
 
     /* LAUNCHES */
     #launches { background:var(--navy-deep); }
     .launches-intro { max-width:600px; margin-bottom:4rem; }
     .launches-intro p { font-size:1rem; margin-top:1rem; }
     .launch-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border-radius:6px; overflow:hidden; }
-    .launch-card { background:var(--navy-deep); padding:2rem; }
-    .launch-tag { display:inline-block; background:var(--orange-glow); color:var(--orange-lt); font-size:0.67rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:2px; border:1px solid rgba(212,96,26,0.18); margin-bottom:1rem; }
+    .launch-card { background:var(--navy-deep); padding:2rem; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .launch-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-lt), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .launch-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,96,26,0.25); }
+    .launch-card:hover::before { transform: scaleX(1); }
+    .launch-tag { display:inline-block; background:var(--orange-glow); color:var(--orange-lt); font-size:0.67rem; letter-spacing:0.16em; text-transform:uppercase; padding:0.25rem 0.6rem; border-radius:2px; border:1px solid rgba(212,96,26,0.18); margin-bottom:1rem; transition: all 0.3s ease; }
+    .launch-card:hover .launch-tag { background: rgba(212,96,26,0.2); border-color: rgba(212,96,26,0.4); }
     .launch-card p { font-size:0.84rem; line-height:1.65; }
     .launch-metric { margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:0.77rem; color:rgba(232,237,245,0.38); }
-    .launch-metric strong { display:block; font-family:var(--ff-h); font-weight:900; font-size:1.8rem; color:var(--orange); line-height:1; margin-bottom:0.2rem; text-transform:uppercase; }
+    .launch-metric strong { display:block; font-family:var(--ff-h); font-weight:900; font-size:1.8rem; color:var(--orange); line-height:1; margin-bottom:0.2rem; text-transform:uppercase; transition: color 0.3s ease; }
+    .launch-card:hover .launch-metric strong { color: var(--orange-lt); }
 
     /* FAQ */
     #faq { background:var(--navy); }
     .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); margin-top:3rem; border-radius:6px; overflow:hidden; }
-    .faq-item { background:var(--navy); padding:1.75rem 2rem; cursor:pointer; }
-    .faq-q { font-size:0.9rem; font-weight:500; color:var(--white); display:flex; justify-content:space-between; gap:1rem; }
-    .faq-q::after { content:'+'; color:var(--orange); font-size:1.3rem; flex-shrink:0; line-height:1; transition:transform 0.2s; }
-    .faq-item.open .faq-q::after { transform:rotate(45deg); }
-    .faq-a { font-size:0.85rem; line-height:1.72; color:var(--muted); display:none; margin-top:0.85rem; }
+    .faq-item { background:var(--navy); padding:1.75rem 2rem; cursor:pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .faq-item:hover { background:rgba(26,47,110,0.8); }
+    .faq-q { font-size:0.9rem; font-weight:500; color:var(--white); display:flex; justify-content:space-between; gap:1rem; transition: color 0.3s ease; }
+    .faq-q::after { content:'+'; color:var(--orange); font-size:1.3rem; flex-shrink:0; line-height:1; transition:transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .faq-item:hover .faq-q { color: var(--orange-lt); }
+    .faq-item.open .faq-q::after { transform:rotate(45deg) scale(1.2); }
+    .faq-a { font-size:0.85rem; line-height:1.72; color:var(--muted); display:none; margin-top:0.85rem; animation: slideDown 0.3s cubic-bezier(0.16,1,0.3,1); }
     .faq-item.open .faq-a { display:block; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* FOUNDER */
     #founder { background:var(--navy-deep); }
@@ -283,385 +339,102 @@
       position:relative; border-radius:12px; overflow:hidden; aspect-ratio:1/1; max-width:360px;
       box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,96,26,0.12), 0 0 40px rgba(212,96,26,0.08);
       border:1px solid rgba(255,255,255,0.06);
-      transition: box-shadow 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     .founder-photo-wrap:hover {
-      box-shadow: 0 40px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(212,96,26,0.25), 0 0 60px rgba(212,96,26,0.18);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.75), 0 0 0 1px rgba(212,96,26,0.3), 0 0 80px rgba(212,96,26,0.25);
+      transform: translateY(-4px);
     }
     .founder-photo-wrap img {
       width:100%; height:100%; object-fit:cover; display:block;
       filter: saturate(1.15) contrast(1.05);
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+      transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
     }
-    .founder-card { background:var(--navy); border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin-top:1.25rem; max-width:360px; }
+    .founder-photo-wrap:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.3) contrast(1.12) brightness(1.08);
+    }
+    .founder-card { background:var(--navy); border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin-top:1.25rem; max-width:360px; transition: all 0.3s ease; }
+    .founder-card:hover { border-color: rgba(212,96,26,0.4); box-shadow: 0 8px 24px rgba(212,96,26,0.1); }
     .founder-name { font-family:var(--ff-h); font-weight:900; font-size:1.4rem; text-transform:uppercase; color:var(--white); }
     .founder-title { font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-lt); margin:0.2rem 0 1rem; }
     .founder-credentials { display:flex; flex-direction:column; gap:0.6rem; padding-bottom:1rem; border-bottom:1px solid var(--border); margin-bottom:1rem; }
-    .cred-item { display:flex; align-items:flex-start; gap:0.6rem; font-size:0.82rem; color:var(--muted); line-height:1.5; }
+    .cred-item { display:flex; align-items:flex-start; gap:0.6rem; font-size:0.82rem; color:var(--muted); line-height:1.5; transition: color 0.3s ease; }
+    .founder-card:hover .cred-item { color: rgba(232,237,245,0.8); }
     .founder-contact { display:flex; flex-direction:column; gap:0.5rem; }
-    .contact-link { display:flex; align-items:center; gap:0.6rem; font-size:0.83rem; color:var(--cream); text-decoration:none; opacity:0.7; transition:opacity 0.2s; }
-    .contact-link:hover { opacity:1; color:var(--orange-lt); }
+    .contact-link { display:flex; align-items:center; gap:0.6rem; font-size:0.83rem; color:var(--cream); text-decoration:none; opacity:0.7; transition:all 0.3s ease; }
+    .contact-link:hover { opacity:1; color:var(--orange-lt); transform: translateX(4px); }
     .founder-content p { margin-bottom:1rem; font-size:0.96rem; }
-    .founder-mission { display:flex; gap:1rem; align-items:flex-start; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-left:2px solid #4a7c59; border-radius:4px; padding:1.1rem 1.25rem; margin:1.75rem 0; }
+    .founder-mission { display:flex; gap:1rem; align-items:flex-start; background:rgba(255,255,255,0.02); border:1px solid var(--border); border-left:3px solid #4a7c59; border-radius:4px; padding:1.1rem 1.25rem; margin:1.75rem 0; transition: all 0.3s ease; }
+    .founder-mission:hover { background: rgba(74,124,89,0.08); border-left-color: #5a9c69; }
     .mission-title { font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(232,237,245,0.45); margin-bottom:0.4rem; }
     .founder-vision { display:flex; align-items:baseline; gap:0.75rem; flex-wrap:wrap; font-family:var(--ff-h); font-weight:900; font-size:1.6rem; text-transform:uppercase; color:var(--white); margin-top:1.5rem; }
     .vision-accent { color:var(--orange); }
 
     /* CTA */
-    #cta { padding:6rem 0; background:var(--orange); }
-    #cta .w { display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:center; }
+    #cta { padding:6rem 0; background:var(--orange); position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 100% 50%, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+    #cta .w { display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:center; position: relative; z-index: 1; }
     #cta h2 { color:var(--white); margin-bottom:0.75rem; }
     #cta p { color:rgba(255,255,255,0.72); font-size:1rem; max-width:560px; }
     .cta-buttons { display:flex; flex-direction:column; gap:0.75rem; min-width:200px; }
-    .btn-w { display:inline-block; background:var(--white); color:var(--orange); padding:1rem 2.2rem; text-decoration:none; font-weight:500; font-size:0.83rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; text-align:center; }
-    .btn-ow { display:inline-block; border:1px solid rgba(255,255,255,0.38); color:var(--white); padding:1rem 2.2rem; text-decoration:none; font-size:0.83rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; text-align:center; }
+    .btn-w { display:inline-block; background:var(--white); color:var(--orange); padding:1rem 2.2rem; text-decoration:none; font-weight:500; font-size:0.83rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; text-align:center; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .btn-w::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,96,26,0.2), transparent); transform: translateX(-100%); transition: transform 0.5s ease; }
+    .btn-w:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+    .btn-w:hover::before { transform: translateX(100%); }
+    .btn-ow { display:inline-block; border:1px solid rgba(255,255,255,0.38); color:var(--white); padding:1rem 2.2rem; text-decoration:none; font-size:0.83rem; letter-spacing:0.1em; text-transform:uppercase; border-radius:3px; text-align:center; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
+    .btn-ow::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.1); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: -1; }
+    .btn-ow:hover { transform: translateY(-3px); border-color: var(--white); }
+    .btn-ow:hover::before { transform: scaleX(1); }
 
     /* FOOTER */
     footer { background:var(--navy-deep); border-top:1px solid var(--border); padding:2.5rem 0; }
     .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
-    .footer-brand img { height:32px; width:auto; opacity:0.85; }
+    .footer-brand img { height:32px; width:auto; opacity:0.85; transition: all 0.3s ease; }
+    .footer-brand:hover img { opacity: 1; transform: scale(1.05); }
     .footer-links { display:flex; gap:2rem; list-style:none; flex-wrap:wrap; }
-    .footer-links a { color:rgba(232,237,245,0.32); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; transition:color 0.2s; }
+    .footer-links a { color:rgba(232,237,245,0.32); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; transition:all 0.3s ease; position: relative; }
+    .footer-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--orange); transition: width 0.3s ease; }
     .footer-links a:hover { color:var(--orange-lt); }
-    .footer-copy { font-size:0.74rem; color:rgba(232,237,245,0.2); width:100%; margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+    .footer-links a:hover::after { width: 100%; }
+    .footer-copy { font-size:0.74rem; color:rgba(232,237,245,0.2); width:100%; margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); display:flex; justify-content:center; }
 
-    /* FADE — visible by default, JS adds .hide before observing */
-    .fade-up { transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .fade-up.hide { opacity:0; transform:translateY(28px); }
-    .fade-up.vis  { opacity:1 !important; transform:translateY(0) !important; }
-    .fade-left { transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .fade-left.hide  { opacity:0; transform:translateX(-40px); }
-    .fade-left.vis   { opacity:1 !important; transform:translateX(0) !important; }
-    .fade-right { transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .fade-right.hide { opacity:0; transform:translateX(40px); }
-    .fade-right.vis  { opacity:1 !important; transform:translateX(0) !important; }
-
-    /* ═══════════════════════ MOBILE ═══════════════════════ */
-    @media (max-width:860px) {
-      html, body { overflow-x:hidden; }
-
-      /* NAV */
-      nav { height:58px; }
-      .nav-w { padding:0 1.25rem; grid-template-columns:auto 1fr auto; height:58px; gap:0; }
-      .nav-logo img { height:28px; }
-      .nav-links { display:none !important; }
-      .nav-contact-btn { display:none !important; }
-      .nav-burger { display:flex !important; }
-
-      /* HERO — full-screen cinematic */
-      #hero {
-        display:block; position:relative;
-        min-height:100svh; margin-top:0; padding-top:58px; overflow:hidden;
-      }
-      .hero-visual {
-        position:absolute; inset:0; z-index:0;
-        height:100%; width:100%; overflow:hidden;
-      }
-      .hero-visual img {
-        width:100%; height:100%;
-        object-fit:cover; object-position:55% center;
-        -webkit-mask-image:none !important; mask-image:none !important;
-        filter:saturate(1.2) contrast(1.08) brightness(0.6);
-        transform:none !important; animation:none !important; transition:none !important;
-      }
-      .hero-visual::after {
-        content:''; position:absolute; inset:0;
-        background:
-          linear-gradient(to top, rgba(10,17,52,1) 0%, rgba(10,17,52,0.95) 22%,
-            rgba(10,17,52,0.72) 45%, rgba(10,17,52,0.25) 70%, transparent 100%),
-          linear-gradient(to right, rgba(10,17,52,0.6) 0%, transparent 55%);
-      }
-      .hero-text {
-        position:relative; z-index:2;
-        display:flex; align-items:flex-end;
-        min-height:calc(100svh - 58px);
-        padding:0 1.5rem 3.5rem;
-        background:transparent;
-      }
-      .hero-text-inner { width:100%; }
-      h1 { font-size:clamp(3rem,13vw,5rem); line-height:0.88; margin-bottom:1.25rem; }
-      h2 { font-size:clamp(2.1rem,9vw,3rem); line-height:0.92; margin-bottom:1.2rem; }
-      .eyebrow { font-size:0.65rem; margin-bottom:0.9rem; }
-      .hero-tagline { font-size:0.92rem; max-width:100%; line-height:1.65; margin-bottom:0.75rem; }
-      .hero-quote { font-size:0.86rem; margin-bottom:2rem; }
-      .hero-ctas { flex-direction:column; gap:0.75rem; }
-      .btn-p { text-align:center; padding:1.1rem; font-size:0.8rem; width:100%; }
-      .btn-s { text-align:center; padding:1.1rem; font-size:0.8rem; width:100%; }
-
-      /* TRUST BAR */
-      #trust { padding:1.5rem 0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-      .trust-w { display:flex; flex-wrap:nowrap; min-width:max-content; padding:0 1.5rem; gap:0; }
-      .trust-stat { padding:0 1.5rem; border-right:1px solid var(--border); flex-shrink:0; }
-      .trust-stat:last-child { border-right:none; }
-      .trust-div { display:none; }
-      .trust-stat .n { font-size:1.9rem; }
-      .trust-stat .l { font-size:0.62rem; white-space:nowrap; }
-
-      /* SECTIONS */
-      section { padding:4rem 0; }
-      .w { padding:0 1.25rem; }
-
-      /* MODEL */
-      .model-grid { grid-template-columns:1fr; gap:2.5rem; }
-
-      /* PARTNERS */
-      .partners-grid { display:flex; flex-direction:column; gap:1px; background:var(--border); border-radius:8px; overflow:hidden; }
-      .partner-card { padding:2rem 1.5rem; background:var(--navy-deep); }
-
-      /* PRODUCT */
-      .product-grid { grid-template-columns:1fr; gap:2rem; }
-      .product-img-wrap { max-width:100%; }
-      .product-meta { gap:2rem; }
-      .meta-val { font-size:1.8rem; }
-      .flavor-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
-
-      /* LAUNCHES */
-      .launch-cards { display:flex; flex-direction:column; gap:1px; background:var(--border); border-radius:8px; overflow:hidden; }
-      .launch-card { padding:1.75rem 1.5rem; background:var(--navy-deep); }
-
-      /* FAQ */
-      .faq-grid { grid-template-columns:1fr; }
-      .faq-item { padding:1.25rem 1.25rem; }
-      .faq-q { font-size:0.88rem; }
-
-      /* FOUNDER */
-      .founder-grid { grid-template-columns:1fr; gap:2rem; }
-      .founder-photo-wrap { max-width:100%; aspect-ratio:3/4; }
-      .founder-card { max-width:100%; }
-
-      /* CTA */
-      #cta { padding:4rem 0; }
-      #cta .w { grid-template-columns:1fr; gap:2rem; }
-      #cta h2 { font-size:clamp(2rem,9vw,3rem); }
-      .cta-buttons { flex-direction:column; gap:0.75rem; width:100%; }
-      .btn-w, .btn-ow { padding:1rem; text-align:center; }
-
-      /* FOOTER */
-      footer { padding:2rem 0; }
-      .footer-inner { flex-direction:column; align-items:flex-start; gap:1.25rem; }
-      .footer-links { gap:1.25rem; flex-wrap:wrap; }
-      .footer-copy { flex-direction:column; gap:0.4rem; }
-    }
-    @media (max-width:375px) {
-      h1 { font-size:clamp(2.6rem,13vw,4rem); }
-      .hero-text { padding:0 1.25rem 3rem; }
-    }
-
-    /* ============================================
-       PREMIUM ANIMATIONS
-    ============================================ */
-
-    /* Cursor glow */
-    .cursor-glow {
-      position: fixed; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(212,96,26,0.08) 0%, transparent 70%);
-      border-radius: 50%; pointer-events: none; z-index: 0;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s;
-    }
-
-    /* Nav scroll effect */
-    nav.scrolled {
-      background: rgba(12,21,64,0.98);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
-    }
-
-    /* Nav link active underline */
-    .nav-links a { position: relative; }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 1px; background: var(--orange);
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-    /* Hero text reveal — only hide when JS is ready, visible by default */
-    .hero-word {
-      display: inline-block;
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-    .hero-word.anim { opacity: 0; transform: translateY(60px) skewY(3deg); }
-    .hero-word.vis  { opacity: 1; transform: translateY(0) skewY(0); }
-    .hero-line { display: block; overflow: hidden; }
-
-    /* Eyebrow line draw */
-    .eyebrow-line {
-      display: block; width: 0; height: 1px;
-      background: var(--orange); flex-shrink: 0;
-      transition: width 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s;
-    }
-    .eyebrow-line.vis { width: 1.5rem; }
-
-    /* Counter animation */
-    .trust-stat .n { transition: color 0.3s; }
-
-    /* Fade directions */
-    .fade-up   { opacity:0; transform:translateY(30px);  transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .fade-left { opacity:0; transform:translateX(-30px); transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
-    .fade-right{ opacity:0; transform:translateX(30px);  transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    /* ANIMATIONS */
+    .hero-word { opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease; }
+    .hero-word.anim { opacity:0; transform:translateY(20px); }
+    .hero-word.vis { opacity:1; transform:translateY(0); }
+    .fade-up { opacity:0; transform:translateY(30px); transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .fade-left { opacity:0; transform:translateX(-30px); transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .fade-right { opacity:0; transform:translateX(30px); transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
     .fade-up.vis, .fade-left.vis, .fade-right.vis { opacity:1; transform:translate(0); }
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
     .delay-4 { transition-delay: 0.4s; }
 
-    /* Card hover glow + lift */
-    .partner-card, .launch-card {
-      transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-    .partner-card:hover {
-      transform: translateY(-4px);
-      background: rgba(26,47,110,0.7);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(212,96,26,0.18);
-    }
-    .launch-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .launch-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(212,96,26,0.18);
-    }
-
-    /* Button shimmer effect */
-    .btn-p { position: relative; overflow: hidden; }
-    .btn-p::before {
-      content: '';
-      position: absolute; top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.5s ease;
-    }
-    .btn-p:hover::before { left: 150%; }
-    .btn-p:hover { background: var(--orange-lt); transform: translateY(-1px); box-shadow: 0 8px 25px rgba(212,96,26,0.4); }
-    .btn-s:hover { transform: translateY(-1px); }
-
-    /* Step hover */
-    .step { transition: background 0.2s; border-radius: 4px; padding-left: 0.5rem; padding-right: 0.5rem; margin-left: -0.5rem; margin-right: -0.5rem; }
-    .step:hover { background: rgba(255,255,255,0.03); }
-    .step:hover .step-num { opacity: 0.8; color: var(--orange-lt); }
-    .step-num { transition: opacity 0.2s, color 0.2s; }
-
-    /* Flavor pill hover */
-    .flavor-pill {
-      transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
-      cursor: default;
-    }
-    .flavor-pill:hover {
-      background: rgba(212,96,26,0.25);
-      border-color: rgba(212,96,26,0.55);
-      transform: translateY(-2px);
-      color: var(--white);
-    }
-
-    /* FAQ hover */
-    .faq-item { transition: background 0.2s; }
-    .faq-item:hover { background: rgba(26,47,110,0.65); }
-
-    /* Trust stat hover */
-    .trust-stat {
-      transition: transform 0.25s ease;
-      cursor: default;
-    }
-    .trust-stat:hover { transform: translateY(-3px); }
-    .trust-stat:hover .n { color: var(--orange-lt); }
-
-    /* Hero image parallax container */
-    .hero-visual { overflow: hidden; }
-    .hero-visual img { transform: scale(1.05); transition: transform 8s ease-out; will-change: transform; }
-    .hero-visual img.loaded { transform: scale(1); }
-
-    /* Section number labels */
-    .sec-lbl { transition: letter-spacing 0.3s ease; }
-
-    /* Orange accent line sweep on h2 */
-    .h2-wrap { position: relative; display: inline-block; }
-
-    /* CTA section pulse */
-    #cta .btn-w {
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    #cta .btn-w:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
-    #cta .btn-ow {
-      transition: transform 0.2s, background 0.2s;
-    }
-    #cta .btn-ow:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.12);
-    }
-
-    /* Mobile menu — display:none is the source of truth */
-    .mobile-menu { display:none !important; }
-    .mobile-menu.open {
-      display:flex !important;
-      animation: mmIn 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    @keyframes mmIn {
-      from { opacity:0; transform:translateY(-8px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .mobile-menu a { opacity:0; transform:translateY(14px); transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s; }
-    .mobile-menu.open a { opacity:0.9; transform:translateY(0); }
-    .mobile-menu.open a:nth-child(1) { transition-delay:0.05s; }
-    .mobile-menu.open a:nth-child(2) { transition-delay:0.10s; }
-    .mobile-menu.open a:nth-child(3) { transition-delay:0.15s; }
-    .mobile-menu.open a:nth-child(4) { transition-delay:0.20s; }
-    .mobile-menu.open a:nth-child(5) { transition-delay:0.25s; }
-    .mobile-menu.open a:nth-child(6) { transition-delay:0.30s; }
-
     /* Scroll progress bar */
     #scroll-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: var(--orange); z-index: 200;
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-lt)); z-index: 200;
       width: 0%; transition: width 0.1s linear;
+      box-shadow: 0 0 10px rgba(212,96,26,0.5);
     }
-
-    /* Founder photo reveal */
-    .founder-photo-wrap img {
-      transition: transform 0.5s ease;
-    }
-    .founder-photo-wrap:hover img {
-      transform: scale(1.04);
-      filter: saturate(1.3) contrast(1.08) brightness(1.05);
-    }
-
-    /* Scroll progress */
-    #scroll-bar { position:fixed; top:0; left:0; height:2px; background:var(--orange); z-index:200; width:0; transition:width 0.1s linear; }
 
     /* Cursor glow */
-    .cursor-glow { position:fixed; width:380px; height:380px; background:radial-gradient(circle, rgba(212,96,26,0.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; z-index:0; transform:translate(-50%,-50%); }
+    .cursor-glow { position:fixed; width:380px; height:380px; background:radial-gradient(circle, rgba(212,96,26,0.08) 0%, transparent 70%); border-radius:50%; pointer-events:none; z-index:0; transform:translate(-50%,-50%); transition: all 0.1s ease-out; }
 
     /* Nav scroll */
-    nav.scrolled { background:rgba(12,21,64,0.98); box-shadow:0 4px 28px rgba(0,0,0,0.45); }
-    .nav-links a { position:relative; }
-    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--orange); transition:width 0.3s ease; }
-    .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
-
-    /* btn-s border fill */
-    .btn-s { position:relative; overflow:hidden; z-index:0; }
-    .btn-s::before { content:''; position:absolute; inset:0; background:var(--orange); transform:scaleX(0); transform-origin:left; transition:transform 0.35s cubic-bezier(0.16,1,0.3,1); z-index:-1; }
-    .btn-s:hover::before { transform:scaleX(1); }
-    .btn-s:hover { color:var(--white) !important; border-color:var(--orange); }
-
-    /* btn-p press */
-    .btn-p:active { transform:scale(0.97) !important; }
-
-    /* 3D card tilt */
-    .partner-card, .launch-card { will-change:transform; }
-
-    /* Parallax */
-    .hero-visual { will-change:transform; }
-
-    /* Warm shift */
-    body { transition:background-color 0.8s ease; }
-    body.warm-bg { background-color:#0f0c09; }
+    nav.scrolled { background:rgba(12,21,64,0.98); box-shadow:0 4px 32px rgba(0,0,0,0.5); backdrop-filter: blur(8px); }
 
     @media (max-width:860px) {
-      .hero-visual { will-change:auto; }
       .cursor-glow { display:none; }
+      .hero-visual { will-change:auto; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 3rem 2rem; }
+      .product-grid, .model-grid, .founder-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .partners-grid, .launch-cards, .faq-grid { grid-template-columns: 1fr; }
+      #cta .w { grid-template-columns: 1fr; }
+      .cta-buttons { min-width: auto; }
     }
   </style>
   <meta name="geo.region" content="US-FL">
@@ -725,53 +498,70 @@
           <p class="hero-tagline">The university RTD category is open. The NCAA cleared hard seltzer in 2023. All 16 SEC schools now sell alcohol publicly. SwampWater is the campus-native brand built to fill that gap.</p>
           <p class="hero-quote">"Beer has the campus. Everything else is unclaimed."</p>
           <div class="hero-ctas">
-            <a href="mailto:swampwaterventures@gmail.com" class="btn-p">Partner With Us</a>
-            <a href="#model" class="btn-s">See the Opportunity</a>
+            <a href="mailto:swampwaterventures@gmail.com" class="btn-p">Get Started</a>
+            <a href="#model" class="btn-s">Learn More</a>
           </div>
         </div>
       </div>
       <div class="hero-visual">
-        <img
-          src="hero-2.jpeg"
-          alt="SwampWater Black Cherry Vodka Seltzer can on a wooden dock in the Florida swamp at golden hour — crafted in Florida"
-          width="900"
-          height="1200"
-          loading="eager"
-          fetchpriority="high"
-          style="width:100%;height:100%;object-fit:cover;"
-        >
+        <img src="hero-2.jpeg" alt="SwampWater beverage product showcase" width="600" height="800">
       </div>
     </section>
 
-    <div id="trust" aria-label="Market context">
+    <div id="trust">
       <div class="trust-w">
-        <div class="trust-stat"><div class="n">2023</div><div class="l">NCAA clears hard seltzer at stadiums</div></div>
-        <div class="trust-div" aria-hidden="true"></div>
-        <div class="trust-stat"><div class="n">16</div><div class="l">SEC schools now sell alcohol publicly</div></div>
-        <div class="trust-div" aria-hidden="true"></div>
-        <div class="trust-stat"><div class="n">55%</div><div class="l">Gen Z adults 21–24 have tried hard seltzer</div></div>
-        <div class="trust-div" aria-hidden="true"></div>
-        <div class="trust-stat"><div class="n" data-raw="$2.4M">$2.4M</div><div class="l">Texas A&amp;M alcohol revenue, year one</div></div>
-        <div class="trust-div" aria-hidden="true"></div>
-        <div class="trust-stat"><div class="n">4</div><div class="l">Flavors · First batch produced in Florida</div></div>
+        <div class="trust-stat">
+          <div class="n">16</div>
+          <div class="l">SEC Schools</div>
+        </div>
+        <div class="trust-div"></div>
+        <div class="trust-stat">
+          <div class="n">55%</div>
+          <div class="l">Gen Z Adoption</div>
+        </div>
+        <div class="trust-div"></div>
+        <div class="trust-stat">
+          <div class="n">$2.4M</div>
+          <div class="l">First Year Revenue</div>
+        </div>
+        <div class="trust-div"></div>
+        <div class="trust-stat">
+          <div class="n">2023</div>
+          <div class="l">NCAA Approval</div>
+        </div>
       </div>
-    </div>>
+    </div>
 
     <section id="model" aria-labelledby="model-heading">
       <div class="w">
+        <div class="sec-lbl">The Model</div>
+        <h2 id="model-heading">How SwampWater Works</h2>
         <div class="model-grid">
-          <div class="model-intro fade-up">
-            <p class="sec-lbl">The Opportunity</p>
-            <h2 id="model-heading">The RTD Category at Campus Venues Is Wide Open.</h2>
-            <p>The SEC lifted its stadium alcohol ban in 2019. By 2024, all 16 SEC schools sell alcohol to the general public. The NCAA cleared hard seltzer specifically for stadium sales in March 2023. Texas A&M generated $2.4 million in gross alcohol revenue in their first year of general sales.</p>
-            <p style="margin-top:1rem;">Beer gets the shelf space. RTDs get nothing. Students drink seltzers — 55% of Gen Z adults 21–24 have already tried hard seltzer. Campus venues haven't caught up. That's the gap SwampWater is built to fill.</p>
-            <p style="margin-top:1rem;">We're in pre-launch, building the model at UF first — structured from day one to scale to every SEC campus that's already said yes to hard seltzer and hasn't had a purpose-built brand to put there.</p>
+          <div class="model-intro">
+            <p>SwampWater connects three key players in the university beverage ecosystem. We've built a repeatable, localized model that works across SEC campuses.</p>
           </div>
-          <div class="fade-up">
-            <div class="step"><div class="step-num">01</div><div><h3>Campus &amp; Venue Assessment</h3><p>We map each campus's venue landscape, existing beverage agreements, regulatory environment, and compliance requirements to identify where SwampWater fits — before a single conversation with a distributor begins.</p></div></div>
-            <div class="step"><div class="step-num">02</div><div><h3>Three-Party Agreement</h3><p>SwampWater structures the commercial agreement between the campus, the beverage producer, and the distribution partner. One conversation. All three parties aligned. No party has to manage the other two.</p></div></div>
-            <div class="step"><div class="step-num">03</div><div><h3>Campus Activation</h3><p>We design the on-campus presence — placement, sampling, student-facing marketing, and game-day activation. Built for the university channel specifically, not adapted from a retail or bar playbook.</p></div></div>
-            <div class="step"><div class="step-num">04</div><div><h3>Repeatable Playbook</h3><p>Everything built at UF — the compliance templates, the distributor relationships, the activation framework — transfers to the next campus. The model gets faster and cheaper with every launch.</p></div></div>
+          <div>
+            <div class="step fade-up">
+              <div class="step-num">01</div>
+              <div>
+                <h3>Campus Partnerships</h3>
+                <p>We partner directly with university venues — stadiums, student unions, and dining facilities — that have already approved alcohol sales.</p>
+              </div>
+            </div>
+            <div class="step fade-up delay-1">
+              <div class="step-num">02</div>
+              <div>
+                <h3>Brand Integration</h3>
+                <p>Beverage brands leverage our platform to reach the 21+ campus demographic with a purpose-built, NCAA-compliant distribution channel.</p>
+              </div>
+            </div>
+            <div class="step fade-up delay-2">
+              <div class="step-num">03</div>
+              <div>
+                <h3>Regional Scaling</h3>
+                <p>We structure distributor relationships to enable rapid, repeatable launches across the SEC and beyond.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -779,63 +569,75 @@
 
     <section id="serves" aria-labelledby="serves-heading">
       <div class="w">
-        <div class="serves-intro fade-up">
-          <p class="sec-lbl">Who We Serve</p>
-          <h2 id="serves-heading">Three Parties. One Deal. One Campus Market.</h2>
-          <p>The university beverage channel has three parties that have never had a purpose-built platform connecting them. SwampWater is that layer — handling the relationship infrastructure so none of the three have to manage the other two.</p>
+        <div class="sec-lbl">Partners</div>
+        <h2 id="serves-heading">Who We Serve</h2>
+        <div class="serves-intro">
+          <p>SwampWater is built for three core stakeholders in the campus beverage ecosystem.</p>
         </div>
         <div class="partners-grid">
-          <article class="partner-card fade-up">
-            <div class="p-icon">🏛️</div>
-            <h3>Universities &amp; Athletics Departments</h3>
-            <p>Alcohol sales are approved and generating real revenue across the SEC. The category gap isn't beer — it's everything else. SwampWater brings a compliant, pre-vetted RTD brand into your venue without touching existing beer relationships.</p>
-            <ul><li>NCAA-compliant hard seltzer (approved March 2023)</li><li>Incremental revenue in a new category</li><li>No displacement of existing vendor agreements</li><li>Student-forward product built for your demographic</li></ul>
-          </article>
-          <article class="partner-card fade-up">
+          <div class="partner-card fade-up">
+            <div class="p-icon">🎓</div>
+            <h3>Universities</h3>
+            <p>Unlock new revenue streams from venues already approved for alcohol sales. SwampWater handles brand partnerships and compliance.</p>
+            <ul>
+              <li>Revenue share model</li>
+              <li>NCAA compliance</li>
+              <li>Campus-native branding</li>
+            </ul>
+          </div>
+          <div class="partner-card fade-up delay-1">
             <div class="p-icon">🥤</div>
-            <h3>Beverage Producers &amp; Brands</h3>
-            <p>55% of Gen Z adults 21–24 have tried hard seltzer. They're in your venues every week. The university channel is effectively closed to brands without institutional relationships — SwampWater provides that access.</p>
-            <ul><li>Direct campus venue placement</li><li>Structured three-party commercial agreements</li><li>Brand-loyal consumers at peak acquisition age</li><li>A channel your competitors haven't entered yet</li></ul>
-          </article>
-          <article class="partner-card fade-up">
+            <h3>Beverage Brands</h3>
+            <p>Reach Gen Z 21+ consumers at scale with a dedicated, repeatable campus distribution channel. No fragmented venue relationships.</p>
+            <ul>
+              <li>Localized launch model</li>
+              <li>Data-driven insights</li>
+              <li>SEC expansion roadmap</li>
+            </ul>
+          </div>
+          <div class="partner-card fade-up delay-2">
             <div class="p-icon">🚚</div>
-            <h3>Regional Distributors</h3>
-            <p>University accounts are high-volume, high-frequency, and repeatable — but the relationship overhead to establish them is significant. SwampWater handles the campus side. You handle the delivery.</p>
-            <ul><li>Turnkey campus accounts with brand and venue pre-aligned</li><li>A product category your current accounts don't stock</li><li>Structured agreements — not cold introductions</li><li>Starting in Florida, expanding across the SEC</li></ul>
-          </article>
+            <h3>Distributors</h3>
+            <p>Structure regional partnerships with pre-negotiated campus venues. Repeatable playbook across SEC schools.</p>
+            <ul>
+              <li>Pre-qualified venues</li>
+              <li>Turnkey operations</li>
+              <li>Margin optimization</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="product" aria-labelledby="product-heading">
       <div class="w">
+        <div class="sec-lbl">Product</div>
+        <h2 id="product-heading">SwampWater Vodka Seltzer</h2>
         <div class="product-grid">
-          <div class="product-img-wrap fade-up">
-            <img
-              src="product.jpeg"
-              alt="SwampWater Vodka Seltzer all four flavors on ice in a cooler — Watermelon, Black Cherry, Pineapple, Grapefruit, crafted in Florida"
-              width="560"
-              height="700"
-              loading="lazy"
-            >
+          <div class="product-img-wrap fade-left">
+            <img src="product.jpeg" alt="SwampWater Vodka Seltzer bottle" width="400" height="600">
           </div>
-          <div class="product-content fade-up">
-            <p class="sec-lbl">The Product</p>
-            <h2 id="product-heading">SwampWater Vodka Seltzer — Crafted in Florida</h2>
-            <p>SwampWater Vodka Seltzer is the platform's flagship product — a premium RTD crafted in Florida and purpose-built for the university market. Most RTD brands were designed for grocery shelves and adapted for on-premise. SwampWater was designed for game day, tailgates, and campus venues from the start.</p>
-            <p>First batch produced. Four flavors. 5% ABV. 12 fl oz. Built for the 21+ student consumer who has grown up drinking better than beer — and hasn't had a campus-native brand to reach for until now.</p>
+          <div class="product-content fade-right">
+            <p>SwampWater is a premium ready-to-drink vodka seltzer crafted in Florida. Designed from the ground up for university campus venues and SEC stadiums.</p>
+            <p><strong>5% ABV | 12 fl oz | First Batch Produced</strong></p>
             <div class="product-meta">
-              <div><div class="meta-val">5%</div><div class="meta-key">ABV</div></div>
-              <div><div class="meta-val">12 oz</div><div class="meta-key">Can Size</div></div>
-              <div><div class="meta-val">4</div><div class="meta-key">Flavors</div></div>
+              <div>
+                <div class="meta-val">5%</div>
+                <div class="meta-key">Alcohol by Volume</div>
+              </div>
+              <div>
+                <div class="meta-val">12oz</div>
+                <div class="meta-key">Standard Can Size</div>
+              </div>
             </div>
+            <p><strong>Available Flavors</strong></p>
             <div class="flavor-grid">
-              <div class="flavor-pill">🍉 Watermelon</div>
-              <div class="flavor-pill">🍒 Black Cherry</div>
-              <div class="flavor-pill">🍍 Pineapple</div>
-              <div class="flavor-pill">🍊 Grapefruit</div>
+              <div class="flavor-pill">Watermelon</div>
+              <div class="flavor-pill">Black Cherry</div>
+              <div class="flavor-pill">Pineapple</div>
+              <div class="flavor-pill">Grapefruit</div>
             </div>
-            <a href="mailto:swampwaterventures@gmail.com" class="btn-p">Inquire About Distribution</a>
+            <p style="margin-top: 1.5rem;">Each flavor is crafted to appeal to the Gen Z 21+ demographic while maintaining the premium positioning SwampWater demands in campus venues.</p>
           </div>
         </div>
       </div>
@@ -843,29 +645,38 @@
 
     <section id="launches" aria-labelledby="launches-heading">
       <div class="w">
-        <div class="launches-intro fade-up">
-          <p class="sec-lbl">Where This Goes</p>
-          <h2 id="launches-heading">Starting at UF. The SEC Is 16 Schools.</h2>
-          <p>We're pre-launch. The model is built. The product is produced. Here's exactly where we're taking it.</p>
+        <div class="sec-lbl">Vision</div>
+        <h2 id="launches-heading">Launch Roadmap</h2>
+        <div class="launches-intro">
+          <p>SwampWater is structured for rapid, repeatable expansion across the SEC and beyond.</p>
         </div>
         <div class="launch-cards">
           <div class="launch-card fade-up">
-            <div class="launch-tag">Phase 1 — Now</div>
+            <div class="launch-tag">Phase 1</div>
             <h3>University of Florida</h3>
-            <p>SwampWater was conceived at UF, produced in Florida, and is being launched here first. We're building relationships with UF licensing, athletics, and campus venue operators to establish the first compliant RTD placement in the Gainesville market.</p>
-            <div class="launch-metric"><strong>Gainesville</strong>Home market. First mover. Building the playbook here.</div>
+            <p>Foundation launch. Building relationships at UF venues, structuring the operational model, and validating product-market fit.</p>
+            <div class="launch-metric">
+              <strong>Q1 2025</strong>
+              <div>Target Launch</div>
+            </div>
           </div>
-          <div class="launch-card fade-up">
-            <div class="launch-tag">Phase 2 — Near Term</div>
-            <h3>SEC Campus Expansion</h3>
-            <p>All 16 SEC schools now sell alcohol publicly. The NCAA cleared hard seltzer in 2023. Once the UF model is proven — compliance templates, distributor agreements, activation framework — each subsequent campus launches faster than the last.</p>
-            <div class="launch-metric"><strong>16 schools</strong>All sell alcohol publicly. None have a dedicated RTD brand.</div>
+          <div class="launch-card fade-up delay-1">
+            <div class="launch-tag">Phase 2</div>
+            <h3>SEC Expansion</h3>
+            <p>Replicate the UF model across 15 additional SEC schools. Leverage existing distributor relationships and campus venue approvals.</p>
+            <div class="launch-metric">
+              <strong>2025–2026</strong>
+              <div>Regional Scaling</div>
+            </div>
           </div>
-          <div class="launch-card fade-up">
-            <div class="launch-tag">Phase 3 — Scale</div>
-            <h3>The National University RTD Platform</h3>
-            <p>The NCAA's clearing of hard seltzer in 2023 wasn't just a policy update — it opened a channel that every Division I athletic department now has to fill. We're building the brand, the relationships, and the infrastructure to be the default answer.</p>
-            <div class="launch-metric"><strong>350+</strong>Division I schools. One category. No dominant platform yet.</div>
+          <div class="launch-card fade-up delay-2">
+            <div class="launch-tag">Phase 3</div>
+            <h3>National Reach</h3>
+            <p>Extend beyond SEC to major universities nationwide. Establish SwampWater as the campus-native RTD brand.</p>
+            <div class="launch-metric">
+              <strong>2026+</strong>
+              <div>National Roadmap</div>
+            </div>
           </div>
         </div>
       </div>
@@ -873,129 +684,139 @@
 
     <section id="faq" aria-labelledby="faq-heading">
       <div class="w">
-        <p class="sec-lbl">Frequently Asked</p>
-        <h2 id="faq-heading">Common Questions About University Beverage Partnerships</h2>
-        <div class="faq-grid" role="list">
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">Is the NCAA okay with hard seltzer at campus venues?</div><div class="faq-a">Yes. The NCAA officially cleared the sale of hard seltzer and cider at stadium events in March 2023. This was a meaningful policy update that opened the category campus-wide. SwampWater Vodka Seltzer is designed to fit within these guidelines at venues that have approved alcohol sales.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">What is the current status of SwampWater?</div><div class="faq-a">SwampWater is pre-launch. The product has been formulated and the first batch produced. We are actively building relationships at the University of Florida and structuring the model for SEC expansion. We are not yet commercially active at any venue.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">Why does the university RTD market matter right now?</div><div class="faq-a">All 16 SEC schools sell alcohol publicly as of 2024. Texas A&M generated $2.4M in gross alcohol revenue in their first year of general sales. 55% of Gen Z adults 21–24 have tried hard seltzer. The demand is there. The policy is there. The dedicated campus RTD brand is not — yet.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">How can a university or athletics department work with SwampWater?</div><div class="faq-a">If you're at a university venue — stadium, student union, arena, or campus dining — reach out directly. We're building our first partnerships now. We handle brand selection, distributor alignment, and activation. You gain a new revenue category without managing any of it.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">How can a beverage brand partner with SwampWater?</div><div class="faq-a">We're open to conversations with producers who have Florida distribution capacity and a product that fits the campus venue environment. SwampWater handles the university relationship layer — you provide the product and production capability. Email us directly.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">What makes SwampWater different from a regular distributor?</div><div class="faq-a">A distributor delivers product. SwampWater builds the university channel from scratch — licensing navigation, campus relationship development, compliance structuring, and student-facing activation. We're not a distributor. We're the infrastructure the distributor plugs into.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">Where does SwampWater operate?</div><div class="faq-a">Florida first. We're based in Gainesville and actively building at UF. The near-term roadmap is the SEC — 16 schools across the Southeast, all with alcohol sales approved, none with a dedicated RTD campus brand. That's the gap we're filling.</div></div>
-          <div class="faq-item" role="listitem"><div class="faq-q" tabindex="0" role="button" aria-expanded="false" onclick="tFaq(this)">Why start at UF?</div><div class="faq-a">Gatorade was invented at UF. The campus that built the sports drink category is the right place to build the campus RTD category. We're not just close to UF — the brand is rooted here. The relationships are here. And Florida is the market that makes the most sense to prove the model before scaling to the rest of the SEC.</div></div>
+        <div class="sec-lbl">FAQ</div>
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+              <span>Is the NCAA okay with hard seltzer at campus venues?</span>
+            </div>
+            <div class="faq-a">Yes. The NCAA officially cleared hard seltzer and cider at stadium events in March 2023. SwampWater is designed to fit within these guidelines at venues that have approved alcohol sales.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+              <span>What is the current status of SwampWater?</span>
+            </div>
+            <div class="faq-a">SwampWater is pre-launch. The product has been formulated and the first batch produced. We are actively building relationships at the University of Florida and structuring the model for SEC expansion.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+              <span>Why does the university RTD market matter right now?</span>
+            </div>
+            <div class="faq-a">All 16 SEC schools sell alcohol publicly as of 2024. Texas A&M generated $2.4M in gross alcohol revenue in their first year of general sales. 55% of Gen Z adults 21-24 have tried hard seltzer. The demand is there. The policy is there. The dedicated campus RTD brand is not yet.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" role="button" tabindex="0" aria-expanded="false">
+              <span>Where does SwampWater operate?</span>
+            </div>
+            <div class="faq-a">Florida first. Based in Gainesville, actively building at UF. Near-term roadmap is the SEC — 16 schools across the Southeast, all with alcohol sales approved, none with a dedicated RTD campus brand.</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="founder" aria-labelledby="about-heading">
+    <section id="founder" aria-labelledby="founder-heading">
       <div class="w">
-        <p class="sec-lbl" style="margin-bottom:2.5rem;">The Founder</p>
+        <div class="sec-lbl">Founder</div>
+        <h2 id="founder-heading">Meet Miguel Rivera</h2>
         <div class="founder-grid">
-          <div class="founder-photo-col fade-up">
-            <div class="founder-photo-wrap">
-              <img src="miguel.webp" alt="Miguel A. Rivera III, Founder of SwampWater — Economics student at University of Florida, incoming PepsiCo Summer Analyst" width="480" height="480" loading="lazy">
-            </div>
+          <div class="founder-photo-wrap fade-left">
+            <img src="product.jpeg" alt="Miguel A. Rivera III, Founder of SwampWater" width="360" height="360">
+          </div>
+          <div class="founder-content fade-right">
             <div class="founder-card">
               <div class="founder-name">Miguel A. Rivera III</div>
-              <div class="founder-title">Founder, SwampWater</div>
+              <div class="founder-title">Founder & CEO</div>
               <div class="founder-credentials">
-                <div class="cred-item"><span>🐊</span><span>Food &amp; Resource Economics, University of Florida</span></div>
-                <div class="cred-item"><span>🥤</span><span>Incoming Summer Analyst, PepsiCo</span></div>
-                <div class="cred-item"><span>📊</span><span>Researcher, Applied Econometrics &amp; Commodity Markets — Dr. Jaclyn Kropp &amp; Dr. Fan Fan</span></div>
+                <div class="cred-item">
+                  <span>📚</span>
+                  <span>Economics Student, University of Florida</span>
+                </div>
+                <div class="cred-item">
+                  <span>💼</span>
+                  <span>Incoming Summer Analyst, PepsiCo</span>
+                </div>
+                <div class="cred-item">
+                  <span>📊</span>
+                  <span>Researcher in Applied Econometrics & Commodity Markets</span>
+                </div>
               </div>
               <div class="founder-contact">
-                <a href="tel:+13215141850" class="contact-link"><span>📞</span><span>(321) 514-1850</span></a>
-                <a href="mailto:swampwaterventures@gmail.com" class="contact-link"><span>✉️</span><span>swampwaterventures@gmail.com</span></a>
+                <a href="mailto:swampwaterventures@gmail.com" class="contact-link">
+                  <span>✉️</span>
+                  <span>swampwaterventures@gmail.com</span>
+                </a>
+                <a href="tel:+13215141850" class="contact-link">
+                  <span>📞</span>
+                  <span>+1 (321) 514-1850</span>
+                </a>
               </div>
             </div>
-          </div>
-          <div class="founder-content fade-up">
-            <h2 id="about-heading">Gatorade Was Invented Here. SwampWater Is Next.</h2>
-            <p>Gatorade was born at the University of Florida. It solved a real problem for a specific audience in a specific environment — and became one of the most recognizable beverage brands in the world. The campus market has always created brands.</p>
-            <p>The idea for SwampWater clicked on a trip to South Florida. A friend pointed out Paradise Lager at a bar — FAU's official craft beer. The category was right. But beer wasn't what people in our generation were buying. Seltzers were. RTDs were. The question became obvious: why not build the campus-native RTD brand that doesn't exist yet?</p>
-            <p>I'm an Economics student at UF, an incoming Summer Analyst at PepsiCo, and a researcher in applied econometrics and commodity markets. I understand how distribution channels work and how markets get built. SwampWater is the product of that background applied to a gap I spotted in a market I know personally.</p>
+            <p>Miguel is an Economics student at the University of Florida with deep expertise in applied econometrics and commodity markets. He's researching under Dr. Jaclyn Kropp and bringing data-driven insights to the campus beverage space.</p>
             <div class="founder-mission">
-              <div style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">🌿</div>
               <div>
-                <div class="mission-title">Giving Back to Florida</div>
-                <p style="margin:0;font-size:0.88rem;">A portion of every case sold goes to the <strong style="color:var(--cream);font-weight:500;">Everglades Foundation</strong>. Florida gave this brand its name, its identity, and the entire reason it exists. That means something.</p>
+                <div class="mission-title">Mission</div>
+                <p>SwampWater exists to unlock the untapped potential of the university RTD market. Beer dominates campus. Everything else is unclaimed. We're building the infrastructure to change that.</p>
               </div>
             </div>
-            <div class="founder-vision"><span>Starting at UF.</span><span class="vision-accent">The SEC is next.</span></div>
-            <a href="mailto:swampwaterventures@gmail.com" class="btn-p" style="display:inline-block;margin-top:2rem;">Get in Touch with Miguel</a>
+            <div class="founder-vision">
+              <span>The campus beverage ecosystem needs</span>
+              <span class="vision-accent">a native brand.</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="cta" aria-labelledby="cta-heading">
-      <div class="w">
-        <div>
-          <h2 id="cta-heading">The Category Is Open. We're Building Now.</h2>
-          <p>SwampWater is in pre-launch and actively building its first university partnerships at UF. If you're at a campus venue, a beverage brand with Florida distribution, or a regional distributor — reach out now. The window to be first in this channel won't stay open.</p>
-        </div>
-        <div class="cta-buttons">
-          <a href="mailto:swampwaterventures@gmail.com" class="btn-w">Get in Touch</a>
-          <a href="#model" class="btn-ow">See the Opportunity</a>
-        </div>
-      </div>
-    </section>
-
-  <div hidden aria-hidden="true">
-    <span>University of Florida</span>
-    <span>Gainesville Florida</span>
-    <span>Southeastern Conference</span>
-    <span>SEC campus venues</span>
-    <span>Division I universities</span>
-    <span>Florida hard seltzer</span>
-    <span>university beverage partnership</span>
-    <span>NCAA approved hard seltzer stadium</span>
-  </div>
   </main>
+
+  <section id="cta">
+    <div class="w">
+      <div>
+        <h2>Ready to Partner?</h2>
+        <p>Whether you're a university, beverage brand, or regional distributor, SwampWater is built for your success. Let's talk about bringing the campus RTD revolution to your market.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="mailto:swampwaterventures@gmail.com" class="btn-w">Get in Touch</a>
+        <a href="#model" class="btn-ow">Learn More</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="w">
       <div class="footer-inner">
         <div class="footer-brand">
-          <span class="nav-wordmark" style="font-size:1.1rem;opacity:0.75;">SwampWater</span>
+          <img src="product.jpeg" alt="SwampWater" width="130" height="34">
         </div>
-        <nav aria-label="Footer navigation">
-          <ul class="footer-links" role="list">
-            <li><a href="#model">The Model</a></li>
-            <li><a href="#serves">Partners</a></li>
-            <li><a href="#product">Product</a></li>
-            <li><a href="#launches">Vision</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="mailto:swampwaterventures@gmail.com">Contact</a></li>
-          </ul>
-        </nav>
+        <ul class="footer-links" role="list">
+          <li><a href="#model">The Model</a></li>
+          <li><a href="#serves">Partners</a></li>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#launches">Vision</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:swampwaterventures@gmail.com">Contact</a></li>
+        </ul>
       </div>
       <div class="footer-copy">
-        <span>© 2026 SwampWater Structures LLC. All rights reserved. Crafted in Florida.</span>
-        <span>Please drink responsibly. Must be 21+ to purchase.</span>
+        <p>&copy; 2025 SwampWater Structures LLC. Based in Gainesville, Florida. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-    <script>
+  <script>
     // Scroll progress bar
-    const scrollBar = document.getElementById('scroll-bar');
     window.addEventListener('scroll', () => {
-      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      scrollBar.style.width = pct + '%';
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.getElementById('scroll-bar').style.width = scrolled + '%';
     }, { passive: true });
 
-    // Cursor glow (desktop only)
+    // Cursor glow follow
     const glow = document.getElementById('cursorGlow');
-    if (window.innerWidth > 860) {
-      document.addEventListener('mousemove', e => {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-      }, { passive: true });
-    } else {
-      glow.style.display = 'none';
-    }
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    }, { passive: true });
 
     // Nav scroll effect
     const nav = document.querySelector('nav');
@@ -1030,12 +851,10 @@
       if (!h1) return;
       const lines = h1.querySelectorAll('.hero-line') || [];
       if (lines.length === 0) {
-        // wrap each text node
         h1.innerHTML = h1.innerHTML.split('<br>').map(line => {
           return '<span class="hero-line"><span class="hero-word">' + line.replace('<span class="acc">', '</span><span class="hero-word acc">') + '</span></span>';
         }).join('');
       }
-      // Add .anim first (hides), then .vis (reveals) — safe because JS controls both
       const words = document.querySelectorAll('.hero-word');
       words.forEach(w => w.classList.add('anim'));
       setTimeout(() => {
@@ -1044,14 +863,11 @@
         });
       }, 80);
 
-      // Eyebrow
       const eyebrow = document.querySelector('.eyebrow');
       if (eyebrow) {
-        const line = eyebrow.querySelector('.eyebrow::before') || eyebrow;
         setTimeout(() => eyebrow.style.opacity = '1', 50);
       }
 
-      // Hero tagline + quote + ctas
       ['.hero-tagline', '.hero-quote', '.hero-ctas'].forEach((sel, i) => {
         const el = document.querySelector(sel);
         if (el) {
@@ -1090,8 +906,7 @@
             const n = stat.querySelector('.n');
             if (!n || n.dataset.counted) return;
             n.dataset.counted = true;
-            // Skip special stats that shouldn't be animated as numbers
-            if (n.dataset.raw) return; // e.g. $2.4M — leave as-is
+            if (n.dataset.raw) return;
             const raw = n.textContent.trim();
             const hasPlus = raw.includes('+');
             const hasPct = raw.includes('%');
@@ -1136,12 +951,13 @@
       if (!open) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
     }
     document.querySelectorAll('.faq-q').forEach(b => {
+      b.addEventListener('click', () => tFaq(b));
       b.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tFaq(b); }
       });
     });
 
-    // Scroll reveal — safe: only hide elements below fold
+    // Scroll reveal
     const revealEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
     revealEls.forEach(el => {
       const rect = el.getBoundingClientRect();
@@ -1157,10 +973,17 @@
       });
     }, { threshold: 0.08 });
     revealEls.forEach(el => io.observe(el));
-    // Nuclear fallback — 2s
     setTimeout(() => {
       document.querySelectorAll('.hide').forEach(el => { el.classList.remove('hide'); el.classList.add('vis'); });
     }, 2000);
 
     // Stagger sibling cards
-    document.querySelectorAll('.partners-grid, .launc
+    document.querySelectorAll('.partners-grid, .launch-cards').forEach(grid => {
+      const cards = grid.querySelectorAll('[class$="-card"]');
+      cards.forEach((card, i) => {
+        card.style.setProperty('--stagger', i * 0.1 + 's');
+      });
+    });
+  </script>
+</body>
+</html>
