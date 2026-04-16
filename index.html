@@ -97,6 +97,22 @@
       }
     ]
   }
+
+    // Parallax hero (desktop only)
+    if (window.innerWidth > 860) {
+      const heroVis = document.querySelector('.hero-visual');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            if (heroVis) heroVis.style.transform = 'translateY(' + (window.scrollY * 0.38) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
   </script>
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -314,7 +330,11 @@
     .footer-copy { font-size:0.74rem; color:rgba(232,237,245,0.2); width:100%; margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); display:flex; justify-content:center; }
 
     /* SCROLL REVEAL CLASSES */
-    .reveal { opacity: 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal { transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.pending-up    { opacity:0!important; transform:translateY(30px); }
+    .reveal.pending-left  { opacity:0!important; transform:translateX(-50px); }
+    .reveal.pending-right { opacity:0!important; transform:translateX(50px); }
+    .reveal.pending-scale { opacity:0!important; transform:scale(0.9); }
     .reveal.visible { opacity: 1; transform: translate(0, 0) scale(1) !important; }
     .reveal-left { transform: translateX(-50px); }
     .reveal-right { transform: translateX(50px); }
@@ -347,6 +367,11 @@
       section { padding: 4rem 0; }
       .cursor-glow { display: none; }
       .reveal-left, .reveal-right, .reveal-up { transform: translate(0, 20px); }
+    }
+
+    /* Parallax */
+    @media (min-width:861px) {
+      .hero-visual { will-change:transform; }
     }
   </style>
 </head>
@@ -851,18 +876,36 @@
     const ctaEl = document.getElementById('cta');
     if (ctaEl) ctaObserver.observe(ctaEl);
 
-    // Scroll Reveal variety
+    // Scroll Reveal — safe: visible by default, only hide below fold
     const revealEls = document.querySelectorAll('.reveal');
+    // Add pending class only to elements below the fold
+    revealEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top > window.innerHeight + 50) {
+        // Determine direction from existing class or data attribute
+        if (el.classList.contains('reveal-left'))  el.classList.add('pending-left');
+        else if (el.classList.contains('reveal-right')) el.classList.add('pending-right');
+        else if (el.classList.contains('reveal-scale')) el.classList.add('pending-scale');
+        else el.classList.add('pending-up');
+      }
+    });
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
+          e.target.classList.remove('pending-up','pending-left','pending-right','pending-scale');
           e.target.classList.add('visible');
           revealObserver.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     revealEls.forEach(el => revealObserver.observe(el));
-    setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2000);
+    // Nuclear fallback — 2s
+    setTimeout(() => {
+      document.querySelectorAll('.pending-up,.pending-left,.pending-right,.pending-scale').forEach(el => {
+        el.classList.remove('pending-up','pending-left','pending-right','pending-scale');
+        el.classList.add('visible');
+      });
+    }, 2000);
 
     // Stagger FAQ reveal
     document.querySelectorAll('.faq-item').forEach((item, i) => {
@@ -916,6 +959,22 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tFaq(b); }
       });
     });
+
+    // Parallax hero (desktop only)
+    if (window.innerWidth > 860) {
+      const heroVis = document.querySelector('.hero-visual');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            if (heroVis) heroVis.style.transform = 'translateY(' + (window.scrollY * 0.38) + 'px)';
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
   </script>
 </body>
 </html>
