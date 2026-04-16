@@ -3,6 +3,8 @@
 
 > *Licensed. Localized. Built to repeat.*
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-swampwaterco.com-orange?style=flat-square)](https://swampwaterco.com)
+
 **Live Site:** [https://swampwaterco.com](https://swampwaterco.com)
 
 ---
@@ -55,8 +57,18 @@ This repo contains the official SwampWater marketing website — a single-page p
 
 ```
 /
-└── index.html        # Full site — all sections, styles, and scripts in one file
-└── README.md         # This file
+├── index.html              # Full site — all sections, styles, and scripts in one file
+├── swampwater-logo.png     # Primary navbar and footer logo
+├── favicon.ico             # Browser tab favicon (multi-size bundled)
+├── favicon-16x16.png       # Favicon 16px
+├── favicon-32x32.png       # Favicon 32px
+├── apple-touch-icon.png    # iOS home screen icon
+├── hero-2.jpeg             # Hero section product image
+├── product.jpeg            # Product section image
+├── miguel.webp             # Founder photo
+├── sitemap.xml             # SEO sitemap
+├── CNAME                   # Custom domain config for GitHub Pages
+└── README.md               # This file
 ```
 
 ---
@@ -64,7 +76,7 @@ This repo contains the official SwampWater marketing website — a single-page p
 ## Founded By
 
 **Miguel Rivera** — Founder, Partnerships & Operations
-Boca Raton, FL · FAU Tech Runway
+Gainesville, FL · University of Florida
 
 ---
 
@@ -74,4 +86,4 @@ Partnership inquiries: **partnerships@swampwaterbev.com**
 
 ---
 
-*SwampWater LLC · Boca Raton, FL · Southeast U.S. → National*
+*SwampWater LLC · Gainesville, FL · Southeast U.S. → National*
