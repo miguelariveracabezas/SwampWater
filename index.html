@@ -26,6 +26,12 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="preload" as="image" href="hero-2.jpeg" fetchpriority="high">
 
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon-3.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,7 +42,7 @@
         "name": "SwampWater",
         "legalName": "SwampWater Structures LLC",
         "url": "https://swampwaterco.com",
-        "logo": { "@type": "ImageObject", "url": "https://swampwaterco.com/product.jpeg" },
+        "logo": { "@type": "ImageObject", "url": "https://swampwaterco.com/logo.png" },
         "description": "SwampWater is a pre-launch university RTD beverage partnership platform connecting campuses, beverage brands, and regional distributors across the SEC. Based in Gainesville, Florida.",
         "foundingLocation": { "@type": "Place", "name": "Gainesville, Florida, United States" },
         "areaServed": ["University of Florida", "Southeastern Conference", "Florida", "Southeast United States"],
@@ -62,7 +68,7 @@
         "@type": "Product",
         "@id": "https://swampwaterco.com/#product",
         "name": "SwampWater Vodka Seltzer",
-        "description": "Premium ready-to-drink vodka seltzer crafted in Florida. 5% ABV, 12 fl oz. Available in 🍉 Watermelon, 🍒 Black Cherry, 🍍 Pineapple, and 🍊 Grapefruit. Purpose-built for university campus venues and SEC stadiums. First batch produced.",
+        "description": "Premium ready-to-drink vodka seltzer crafted in Florida. 5% ABV, 12 fl oz. Available in Watermelon, Black Cherry, Pineapple, and Grapefruit. Purpose-built for university campus venues and SEC stadiums. First batch produced.",
         "brand": { "@type": "Brand", "name": "SwampWater" },
         "manufacturer": { "@id": "https://swampwaterco.com/#organization" },
         "additionalProperty": [
@@ -145,7 +151,8 @@
     nav { position:fixed; top:0; left:0; right:0; z-index:100; background:var(--navy-deep); border-bottom:1px solid var(--border); height:64px; display:flex; align-items:center; transition: all 0.3s ease; }
     nav.scrolled { background:rgba(12,21,64,0.98); box-shadow:0 4px 28px rgba(0,0,0,0.45); }
     .nav-w { max-width:1280px; margin:0 auto; padding:0 2.5rem; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; height:64px; }
-    .nav-logo img { height:36px; width:auto; display:block; }
+    .nav-logo { display:flex; align-items:center; }
+    .nav-logo img { height:48px; width:auto; max-width:240px; display:block; object-fit:contain; }
     .nav-links { display:flex; list-style:none; gap:2.8rem; align-items:center; justify-content:center; }
     .nav-links a { color:var(--cream); text-decoration:none; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; opacity:0.6; transition:opacity 0.2s,color 0.2s; position: relative; }
     .nav-links a:hover, .nav-links a.active { opacity:1; color:var(--orange-lt); }
@@ -323,7 +330,8 @@
     /* FOOTER */
     footer { background:var(--navy-deep); border-top:1px solid var(--border); padding:2.5rem 0; }
     .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; }
-    .footer-brand img { height:32px; width:auto; opacity:0.85; }
+    .footer-brand { display:flex; align-items:center; }
+    .footer-brand img { height:42px; width:auto; max-width:220px; display:block; object-fit:contain; opacity:0.9; }
     .footer-links { display:flex; gap:2rem; list-style:none; flex-wrap:wrap; }
     .footer-links a { color:rgba(232,237,245,0.32); text-decoration:none; font-size:0.78rem; letter-spacing:0.08em; transition:color 0.2s; }
     .footer-links a:hover { color:var(--orange-lt); }
@@ -348,9 +356,10 @@
     .cursor-glow { position:fixed; width:380px; height:380px; background:radial-gradient(circle, rgba(212,96,26,0.07) 0%, transparent 70%); border-radius:50%; pointer-events:none; z-index:0; transform:translate(-50%,-50%); }
 
     /* MOBILE LAYOUT */
-    @media (max-width: 860px) {
+      @media (max-width: 860px) {
       nav { height: 58px; }
       .nav-w { grid-template-columns: 1fr auto; padding: 0 1.5rem; }
+      .nav-logo img { height:36px; max-width:180px; }
       .nav-links, .nav-contact-btn { display: none !important; }
       .nav-burger { display: flex !important; }
       
@@ -385,7 +394,7 @@
   <nav aria-label="Main navigation">
     <div class="nav-w">
       <a href="/" class="nav-logo" aria-label="SwampWater home">
-        <img src="product.jpeg" alt="SwampWater — University RTD Beverage Platform" width="130" height="34">
+        <img src="swampwater-logo.png" alt="SwampWater logo" width="240" height="48">
       </a>
       <ul class="nav-links" role="list">
         <li><a href="#model">The Opportunity</a></li>
@@ -708,9 +717,9 @@
             </div>
           </div>
           <div class="founder-content reveal reveal-right">
-            <p>"Gatorade was born at the University of Florida. It solved a real problem for a specific audience in a specific environment — and became one of the most recognizable beverage brands in the world. The campus market has always created brands.
-                The idea for SwampWater clicked on a trip to South Florida. A friend pointed out Paradise Lager — FAU's official craft beer. The category made sense. But beer wasn't what our generation was buying. Seltzers were. RTDs were. The off-premise shift had been one of the clearest demand signals in beverage for years — and no one had built the campus-native RTD brand yet.
-                I'm an Economics student at UF, an incoming intern at PepsiCo, and someone who spends a lot of time thinking about how distribution channels work and how consumer markets get built. SwampWater is the background pointed at a gap I found in a market I know firsthand.</p>
+            <p>Gatorade was born at the University of Florida. It solved a real problem for a specific audience in a specific environment — and became one of the most recognizable beverage brands in the world. The campus market has always created brands.</p>
+            <p>The idea for SwampWater clicked on a trip to South Florida. A friend pointed out Paradise Lager — FAU's official craft beer. The category was right. But beer wasn't what people in our generation were buying. Seltzers were. RTDs were. The question became obvious: why not build the campus-native RTD brand that doesn't exist yet?</p>
+            <p>I'm an Economics student at UF, an incoming Summer Analyst at PepsiCo, and a researcher in applied econometrics and commodity markets. I understand how distribution channels work and how markets get built. SwampWater is the product of that background applied to a gap I spotted in a market I know personally.</p>
             <div class="founder-mission">
               <div>
                 <div class="mission-title">Mission</div>
@@ -752,7 +761,7 @@
     <div class="w">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="product.jpeg" alt="SwampWater — University RTD Beverage Platform" width="130" height="34">
+          <img src="swampwater-logo.png" alt="SwampWater logo" width="220" height="42">
         </div>
         <ul class="footer-links" role="list">
           <li><a href="#model">The Opportunity</a></li>
