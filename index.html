@@ -191,7 +191,7 @@
   width:100%; height:100%; object-fit:cover; object-position:center center; display:block;
   -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
   mask-image: linear-gradient(to left, black 60%, transparent 100%);
-  filter: saturate(1.1) contrast(1.04) brightness(0.92);
+  filter: saturate(1.0) contrast(1.0) brightness(0.90);
 }
     h1 { font-family:var(--ff-h); font-weight:900; font-size:clamp(3rem,5.5vw,5.5rem); line-height:0.92; text-transform:uppercase; letter-spacing:0.01em; color:var(--white); margin-bottom:1.25rem; }
     h1 .acc { color:var(--orange); }
@@ -261,8 +261,13 @@
     .product-img-wrap img {
       width:100%; height:auto; border-radius:12px; position:relative; z-index:1;
       box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,96,26,0.15);
-      filter: saturate(1.3) contrast(1.06) brightness(1.04);
+      filter: saturate(1.0) contrast(1.00) brightness(1.00);
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .product-img-wrap video {
+      width:100%; height:auto; border-radius:12px; position:relative; z-index:1;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,96,26,0.15);
+      filter: saturate(1.0) contrast(1.00) brightness(1.00);
     }
     .product-img-wrap:hover img { transform: scale(1.03) translateY(-6px); }
     .product-content p { margin-bottom:1rem; font-size:0.96rem; }
@@ -569,8 +574,10 @@
         <h2 id="product-heading" class="reveal reveal-up">SwampWater Vodka Seltzer</h2>
         <div class="product-grid">
           <div class="product-img-wrap reveal reveal-left">
-            <img src="swampwater_product.jpeg" alt="SwampWater Vodka Seltzer all four flavors on ice in a cooler — Watermelon, Black Cherry, Pineapple, Grapefruit, crafted in Florida" width="400" height="600" decoding="async">
-          </div>
+  <video autoplay muted loop playsinline>
+    <source src="swampwater-tailgate.mp4" type="video/mp4">
+  </video>
+</div>
           <div class="product-content reveal reveal-right">
             <p>SwampWater Vodka Seltzer is the platform's flagship product — a premium RTD crafted in Florida and purpose-built for the university market. Most RTD brands were designed for grocery shelves and adapted for on-premise. SwampWater was designed for game day, tailgates, and campus venues from the start.</p>
             <p>First batch produced. Four flavors. 5% ABV. 12 fl oz. Built for the 21+ student consumer who has grown up drinking better than beer — and hasn't had a campus-native brand to reach for until now.</p>
